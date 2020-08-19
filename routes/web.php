@@ -18,7 +18,7 @@ use App\Http\MiddleWare\CheckLanguage;
 Route::get('/',function()
 {
       return redirect(config('app.locale').'/welcome');
-});
+})->middleware(CheckLanguage::class);
 Route::middleware([CheckLanguage::class])->group(function()
 {
   
@@ -41,21 +41,3 @@ Route::middleware([CheckLanguage::class])->group(function()
     });
    
 });
-/*
-Route::get('/{locale}',function($locale){
-    if (! in_array($locale, ['en', 'fa-IR', 'fr'])) {
-        abort(400);
-    }
-    App::setLocale($locale);
-    Route::get('hello-world', function () {
-        die('et');
-        return view('hello-world');
-    })->name('hello-world');
-    Route::get('welcome', function () {
-        return view('welcome');
-    });
-});
-
-  
-    
-//});
