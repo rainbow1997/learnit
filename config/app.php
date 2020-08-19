@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fa-IR',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'fa-IR',
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +122,15 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
-
+/*
+    |--------------------------------------------------------------------------
+    | My Locales
+    |--------------------------------------------------------------------------
+    |The list of my locales that presents in this config.
+    |
+    */
+    'locales'=>['en','fa-IR'],
+    
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -133,6 +141,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+ 
 
     'providers' => [
 
