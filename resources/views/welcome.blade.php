@@ -7,14 +7,21 @@
         <title>@lang('message.welcome_title')</title>
         
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        @if(App::isLocale('fa_IR'))
+            <link rel='stylesheet' type='text/css' href='http://awebfont.ir/css?id=1116'>
+        @else
+            <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        @endif
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
+    @if(App::isLocale('fa_IR'))
+                font-family: 'B Yekan';
+    @else
                 font-family: 'Nunito', sans-serif;
+    @endif
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;

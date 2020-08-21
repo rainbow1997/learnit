@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Middleware;
 use Closure;
+use Exception;
 use Illuminate\Foundation\Application as App;
 class CheckLanguage
 {
@@ -13,23 +14,38 @@ class CheckLanguage
      */
     public function handle($request, Closure $next)
     {
-        if(!empty($request->cookie('lang')))
-            return $next($request);
-       // echo($md);
-     //  echo var_dump($request->segment(1));//echo locale variable from route /
-     $available_locales=config('app.locales');
-     $userLocale=\Location::get(request()->ip());
-     $locale=$request->segment(1);
-     echo $userLocale->countryCode;
-     if($locale!="fa-IR" || $userLocale->countryCode!="IR")
-     {
-         echo'IRnits';
-        app()->setLocale('en');//app facade for use setLocale (new shape)
-        $cookie=cookie('lang','en',1440);
-     }
-     else
-     $cookie=cookie('lang','fa-IR',1440);
-
-        return $next($request);
+     app()->setLocale($this->checkUserIsoCode(request()->segments(1)));//segments=address/address2 from route
+     return $next($request);
     }
+    private function checkUserIsoCode($path)
+    {
+     $available_locales=config('app.locales');
+     if($path==null)// => "/" in addressbar
+        {
+            try
+            {
+                $userLocale=\Location::get(request()->ip())->countryCode;
+            }
+            catch(Exception $e)
+            {
+            $userLocale="fa_IR";
+            }
+        }
+         else
+         $userLocale=$path[0];//locale  =>/locale/address
+
+     foreach($available_locales as $locale)
+     {
+        if(strpos($locale,$userLocale)!==false)//if $locale contain userlocale
+         {
+             $userLocale=$locale;
+             break;
+         }
+     }
+     if(!in_array($userLocale,$available_locales,TRUE))
+        $userLocale=config('app.fallback_locale');
+     return $userLocale;
+
+    }
+
 }

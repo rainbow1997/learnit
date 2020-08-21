@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\MiddleWare\CheckIp;
+use Illuminate\Foundation\Application as App;
+
 use App\Http\MiddleWare\CheckLanguage;
 
 
@@ -15,29 +17,21 @@ use App\Http\MiddleWare\CheckLanguage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function()
-{
-      return redirect(config('app.locale').'/welcome');
-})->middleware(CheckLanguage::class);
 Route::middleware([CheckLanguage::class])->group(function()
 {
-  
-    Route::prefix('/{locale}')->group(function()
-    {
-        Route::get('/',function()
-{
-      return redirect(config('app.locale').'/welcome');
-});
-       
-        Route::get('welcome',function()
-        {
-              return view('welcome');
-        });
-        Route::get('hello-world',function()
-        {
-              return view('hello-world');
-        });
+      Route::get('/',function()
+      {
 
-    });
-   
+            return redirect(config('app.locale').'/welcome');
+      });
+      Route::get('/{locale}',function()
+      {
+
+            return redirect(config('app.locale').'/welcome');
+      });
+      Route::get('/{locale}/welcome',function($locale)
+      {
+            return view('welcome');
+      });
 });
+   
