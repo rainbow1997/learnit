@@ -19,10 +19,11 @@ use Illuminate\Support\Facades\Auth;
 */
 //cookie set cookie()-queue()
 //cookie get request()->cookie()
-Route::get('/', function (Request $request) 
+Route::get('/', function () 
 {
-    echo('CookieInRoute\'/\''.$request->cookie('language'));
-    return redirect(request()->cookie('language').'/welcome');
+   // echo "befpreRpikte".$request->cookie('language').'<br/>';
+ //   return ('CookieInRoute\'/\''.request()->cookie('language'));
+     return redirect(App::getLocale().'/welcome');
   
 })->middleware(CheckLanguage::class);
 

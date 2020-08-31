@@ -18,16 +18,17 @@ class CheckLanguage
         //echo(var_dump(request()->cookie('language')));
        //if(empty(request()->cookie('language')))
             cookie()->queue('language',$this->checkUserIsoCode($request->path()),60);
-             App::setLocale(request()->cookie('language'));
+             App::setLocale($this->checkUserIsoCode($request->path()));
        // dd(request()->cookie('language'));
      return $next($request);
     }
     private function checkUserIsoCode($path)
     {
-        echo '<br/> <c> c</c></br>';
+       // echo '<br/> <c> c</c></br>';
 
      $available_locales=config('app.all_locales');
-     if($path==null)// => "/" in addressbar
+    
+     if($path==null || $path=="/")// => "/" in addressbar
         {
             try
             {
@@ -35,6 +36,7 @@ class CheckLanguage
             }
             catch(Exception $e)
             {
+
             $userLocale="fa_IR";
             }
         }
