@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Middleware\CheckLanguage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\MiddleWare\CheckIp;
-use Illuminate\Foundation\Application as App;
-
-use App\Http\MiddleWare\CheckLanguage;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -17,21 +17,35 @@ use App\Http\MiddleWare\CheckLanguage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware([CheckLanguage::class])->group(function()
+//cookie set cookie()-queue()
+//cookie get request()->cookie()
+Route::get('/', function (Request $request) 
 {
-      Route::get('/',function()
-      {
+    echo('CookieInRoute\'/\''.$request->cookie('language'));
+    return redirect(request()->cookie('language').'/welcome');
+  
+})->middleware(CheckLanguage::class);
 
-            return redirect(config('app.locale').'/welcome');
-      });
-      Route::get('/{locale}',function()
-      {
+Route::get('/{locale}',function($locale)
+{
+    return redirect($locale.'/welcome');
 
-            return redirect(config('app.locale').'/welcome');
-      });
-      Route::get('/{locale}/welcome',function($locale)
-      {
-            return view('welcome');
-      });
 });
-   
+
+Route::get('{locale}/welcome',function($locale)
+{
+    //echo('CookieInRoute\'/\''.request()->cookie('language'));
+    return view('welcome');
+
+})->middleware(CheckLanguage::class);
+
+Route::group(['prefix' =>App::getLocale()], function () {
+
+    Auth::routes();
+  //  Route::get('{locale}/login','HomeController@login');
+//Route::get('{locale}/home','HomeController@index');
+
+});
+
+
+

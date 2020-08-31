@@ -2,7 +2,8 @@
 namespace App\Http\Middleware;
 use Closure;
 use Exception;
-use Illuminate\Foundation\Application as App;
+use Illuminate\Support\Facades\App;
+
 class CheckLanguage
 {
     /**
@@ -14,12 +15,18 @@ class CheckLanguage
      */
     public function handle($request, Closure $next)
     {
-     app()->setLocale($this->checkUserIsoCode(request()->segments(1)));//segments=address/address2 from route
+        //echo(var_dump(request()->cookie('language')));
+       //if(empty(request()->cookie('language')))
+            cookie()->queue('language',$this->checkUserIsoCode($request->path()),60);
+             App::setLocale(request()->cookie('language'));
+       // dd(request()->cookie('language'));
      return $next($request);
     }
     private function checkUserIsoCode($path)
     {
-     $available_locales=config('app.locales');
+        echo '<br/> <c> c</c></br>';
+
+     $available_locales=config('app.all_locales');
      if($path==null)// => "/" in addressbar
         {
             try
