@@ -33,8 +33,13 @@ class LoginController extends Controller
      *
      * @return void
      */
+    public function redirectTo()
+    {
+        return app()->getLocale() . '/home';
+    }
     public function __construct()
     {
+        //$this->redirectTo=$this->redirectTo();
         $this->middleware('guest')->except('logout');
     }
 }

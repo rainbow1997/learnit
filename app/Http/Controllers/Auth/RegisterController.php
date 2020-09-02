@@ -38,9 +38,14 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        //$this->redirectTo=$this->redirectTo();
+
         $this->middleware('guest');
     }
-
+    public function redirectTo()
+    {
+        return app()->getLocale() . '/home';
+    }
     /**
      * Get a validator for an incoming registration request.
      *
