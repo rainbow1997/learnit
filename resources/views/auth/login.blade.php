@@ -8,7 +8,7 @@
                 <div class="card-header">@lang('layout.login_text')</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login',app()->getLocale()) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -57,8 +57,8 @@
                                     @lang('layout.login_text')
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                @if (Route::has('password.request',app()->getLocale()))
+                                    <a class="btn btn-link" href="{{ route('password.request',app()->getLocale()) }}">
                                         @lang('layout.forgot_password')
                                     </a>
                                 @endif

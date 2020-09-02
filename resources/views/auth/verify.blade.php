@@ -16,7 +16,7 @@
 
                     @lang('layout.before_proceeding_check_mail')
                     @lang('layout.if_you_did_not_receive_the_email'),
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    <form class="d-inline" method="POST" action="{{ route('verification.resend',app()->getLocale()) }}">
                         @csrf
                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">@lang('layout.click_here_to_request_another')</button>.
                     </form>

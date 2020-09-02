@@ -24,6 +24,10 @@ return
     'verification_account'=>'احراز هویت',
     'logout_text'=>'خروج',
     'Dashboard'=>'داشبورد',
-    'youAreLoggedIn'=>'شما وارد شده اید !'
+    'youAreLoggedIn'=>'شما وارد شده اید !',
+    'app_copyright'=>'تمامی حقوق برای این وب سایت محفوظ است.',
+    'welcome_pagetitle'=>'خوش آمدید'
+
+
 
 ];

@@ -19,34 +19,20 @@ use Illuminate\Support\Facades\Auth;
 */
 //cookie set cookie()-queue()
 //cookie get request()->cookie()
-Route::get('/', function () 
+ Route::get('/', function () 
 {
-   // echo "befpreRpikte".$request->cookie('language').'<br/>';
- //   return ('CookieInRoute\'/\''.request()->cookie('language'));
+ 
      return redirect(App::getLocale().'/welcome');
   
 })->middleware(CheckLanguage::class);
 
-Route::get('/{locale}',function($locale)
-{
-    return redirect($locale.'/welcome');
-
-});
-
-Route::get('{locale}/welcome',function($locale)
-{
-    //echo('CookieInRoute\'/\''.request()->cookie('language'));
+Route::prefix('{locale}')->group(function(){
+  Route::get('/', function ($locale) {
+        return redirect($locale.'/welcome');
+      });
+  Route::get('/welcome', function () {
     return view('welcome');
-
-})->middleware(CheckLanguage::class);
-
-Route::group(['prefix' =>App::getLocale()], function () {
-
-    Auth::routes();
-  //  Route::get('{locale}/login','HomeController@login');
-//Route::get('{locale}/home','HomeController@index');
-
+  });
+  Auth::routes();
+  Route::get('/home','HomeController@index');
 });
-
-
-

@@ -8,7 +8,7 @@
                 <div class="card-header">@lang('layout.register_text')</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register',app()->getLocale()) }}">
                         @csrf
 
                         <div class="form-group row">

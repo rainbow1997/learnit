@@ -20,6 +20,8 @@ return
     'verification_account'=>'Account Verification',
     'logout_text'=>'Logout',
     'Dashboard'=>'Dashboard',
-    'youAreLoggedIn'=>'You are logged in !'
+    'youAreLoggedIn'=>'You are logged in !',
+    'app_copyright'=>'All right reserved.',
+    'welcome_pagetitle'=>'Welcome'
 
 ];
