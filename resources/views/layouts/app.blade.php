@@ -32,8 +32,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav mr-1">
+                    @foreach(config('app.all_locales') as $locale)
+                        <li class="w-25 h-25">
+                        <a class="nav-link" href="{{url('/'.$locale)}}">
+                        <img width="100px" src="{{ asset('images/'.$locale.'.ico') }}" alt="{{$locale}}" class="img-fluid">
+                     </a>
+                        </li>
+                    @endforeach
                     </ul>
 
                     <!-- Right Side Of Navbar -->
