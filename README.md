@@ -1,11 +1,11 @@
 ## About Learnit
 
-Learnit is a e_learning web application by Laravel Php framework.
+Learnit is an e_learning web application by Laravel Php framework.
 
 - [Programmer](https://mostafajamali.ir).
 - [University](https://nit.ac.ir).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Learnit is accessible, powerful, and provides tools required for large, robust learning institutes.
 
 ## Contributing
 
