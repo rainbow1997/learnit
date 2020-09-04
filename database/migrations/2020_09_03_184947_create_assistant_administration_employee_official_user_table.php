@@ -13,9 +13,12 @@ class CreateAssistantAdministrationEmployeeOfficialUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('assistant_administration_employee_official_users', function (Blueprint $table) {
+        Schema::create('assist_admin_employee_o_u', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('admin_employee_o_u_id')->constrained('admin_employee_o_u')->onDelete('cascade');
+
             $table->timestamps();
+            
         });
     }
 
@@ -26,6 +29,6 @@ class CreateAssistantAdministrationEmployeeOfficialUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assistant_administration_employee_official_users');
+        Schema::dropIfExists('assist_admin_employee_o_u');
     }
 }

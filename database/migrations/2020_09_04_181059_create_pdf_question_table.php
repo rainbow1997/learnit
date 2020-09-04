@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeeOfficialUserTable extends Migration
+class CreatePdfQuestionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateEmployeeOfficialUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_o_u', function (Blueprint $table) {
+        Schema::create('pdf_question', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('official_users_id')->constrained('official_users')->onDelete('cascade');
-
             $table->timestamps();
+             $table->foreignId('question_id')->constrained('question')->onDelete('cascade');
+             $table->foreignId('question_attachment_id')->constrained('question_attachment')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateEmployeeOfficialUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_o_u');
+        Schema::dropIfExists('pdf_question');
     }
 }

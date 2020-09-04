@@ -15,6 +15,8 @@ class CreateOfficialUserTable extends Migration
     {
         Schema::create('official_users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
+
             $table->timestamps();
             $table->bigInteger('personal_code');
 

@@ -13,9 +13,12 @@ class CreateDirectorgeneralAdministrationEmployeeOfficialUserTable extends Migra
      */
     public function up()
     {
-        Schema::create('directorgeneral_administration_employee_official_users', function (Blueprint $table) {
+        Schema::create('general_admin_employee_o_u', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('admin_employee_o_u_id')->constrained('admin_employee_o_u')->onDelete('cascade');
+
             $table->timestamps();
+
         });
     }
 
@@ -26,6 +29,6 @@ class CreateDirectorgeneralAdministrationEmployeeOfficialUserTable extends Migra
      */
     public function down()
     {
-        Schema::dropIfExists('directorgeneral_administration_employee_official_users');
+        Schema::dropIfExists('general_admin_employee_o_u');
     }
 }

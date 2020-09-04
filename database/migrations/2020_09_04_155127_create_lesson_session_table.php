@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmployeeOfficialUserTable extends Migration
+class CreateLessonSessionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateEmployeeOfficialUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_o_u', function (Blueprint $table) {
+        Schema::create('lesson_session', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('official_users_id')->constrained('official_users')->onDelete('cascade');
-
             $table->timestamps();
+            $table->foreignId('lesson_id')->constrained('lesson')->onDelete('cascade');
+            $table->Integer('sort_number');
+            $table->boolean('status')->default(TRUE);
         });
     }
 
@@ -28,6 +29,6 @@ class CreateEmployeeOfficialUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_o_u');
+        Schema::dropIfExists('lesson_session');
     }
 }

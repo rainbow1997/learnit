@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Query\Expression;
 
-class CreateEmployeeOfficialUserTable extends Migration
+class CreateAttachmentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,13 @@ class CreateEmployeeOfficialUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('employee_o_u', function (Blueprint $table) {
+        Schema::create('attachment', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('official_users_id')->constrained('official_users')->onDelete('cascade');
-
             $table->timestamps();
+            $table->mediumText('describe');
+            $table->json('file')->default(new Expression('(JSON_ARRAY())'));
+            $table->boolean('status')->default(TRUE);
+
         });
     }
 
@@ -28,6 +31,6 @@ class CreateEmployeeOfficialUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_o_u');
+        Schema::dropIfExists('attachment');
     }
 }

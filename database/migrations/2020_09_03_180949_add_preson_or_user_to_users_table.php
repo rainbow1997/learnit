@@ -16,9 +16,7 @@ class AddPresonOrUserToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('name');
-            $table->string('fname');
-            $table->string('lname');
+            //$table->dropColumn('name');
             $table->bigInteger('nationalcode')->unique();
             $table->date('birthdate');
             $table->bigInteger('mobile')->unique();

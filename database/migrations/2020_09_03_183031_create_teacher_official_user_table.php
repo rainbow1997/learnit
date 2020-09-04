@@ -13,8 +13,10 @@ class CreateTeacherOfficialUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('teacher_official_users', function (Blueprint $table) {
+        Schema::create('teacher_o_u', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('official_users_id')->constrained('official_users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateTeacherOfficialUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teacher_official_users');
+        Schema::dropIfExists('teacher_o_u');
     }
 }

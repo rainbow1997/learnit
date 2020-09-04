@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonTable extends Migration
+class CreatePdfQuestionOptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreatePersonTable extends Migration
      */
     public function up()
     {
-        Schema::create('person', function (Blueprint $table) {
+        Schema::create('pdf_ques_opt', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nationalcode')->unique();
-            $table->string('fname');
-            $table->string('lname');
-            $table->string('username')->unique();
-            //$table->
+            $table->foreignId('attachment_id')->constrained('attachment')->onDelete('cascade');
+            $table->foreignId('question_option_id')->constrained('question_option')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatePersonTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('person');
+        Schema::dropIfExists('pdf_ques_opt');
     }
 }
