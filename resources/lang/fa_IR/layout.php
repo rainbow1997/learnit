@@ -26,7 +26,13 @@ return
     'Dashboard'=>'داشبورد',
     'youAreLoggedIn'=>'شما وارد شده اید !',
     'app_copyright'=>'تمامی حقوق برای این وب سایت محفوظ است.',
-    'welcome_pagetitle'=>'خوش آمدید'
+    'welcome_pagetitle'=>'خوش آمدید',
+    'hello'=>'درود !',
+    'Whoops'=>'متاسفیم!',
+    'Regards'=>'همیار شما',
+    'email_click_trouble'=>'اگر با کلیک کردن روی دکمه :btn "" مشکل دارید ، URL زیر را در مرورگر وب خود کپی و جایگذاری کنید'
+
+
 
 
 

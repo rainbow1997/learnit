@@ -22,6 +22,10 @@ return
     'Dashboard'=>'Dashboard',
     'youAreLoggedIn'=>'You are logged in !',
     'app_copyright'=>'All right reserved.',
-    'welcome_pagetitle'=>'Welcome'
+    'welcome_pagetitle'=>'Welcome',
+    'hello'=>'Hello',
+    'Whoops'=>'Whoops!',
+    'Regards'=>'Regards',
+    'email_click_trouble'=>'If you’re having trouble clicking the :btn "" button, copy and paste the URL below into your web browser'
 
 ];

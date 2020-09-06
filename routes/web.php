@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckLanguage;
+use App\User as UserClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -35,4 +36,11 @@ Route::prefix('{locale}')->group(function(){
   });
   Auth::routes();
   Route::get('/home','HomeController@index');
+  Route::get('/testEmail',function()
+  {
+    $user=UserClass::find(1);
+   // die(var_dump($user));
+        return (new \App\Notifications\welcomeNotification($user))
+    ->toMail($user->email);
+  });
 });
