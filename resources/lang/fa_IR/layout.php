@@ -25,12 +25,12 @@ return
     'logout_text'=>'خروج',
     'Dashboard'=>'داشبورد',
     'youAreLoggedIn'=>'شما وارد شده اید !',
-    'app_copyright'=>'تمامی حقوق برای این وب سایت محفوظ است.',
+    'app_copyright'=>'تمامی حقوق برای '.__('settings.app_name',[],app()->getLocale()).' محفوظ است.',
     'welcome_pagetitle'=>'خوش آمدید',
     'hello'=>'درود !',
     'Whoops'=>'متاسفیم!',
     'Regards'=>'همیار شما',
-    'email_click_trouble'=>'اگر با کلیک کردن روی دکمه :btn "" مشکل دارید ، URL زیر را در مرورگر وب خود کپی و جایگذاری کنید'
+    'email_click_trouble'=>'اگر با کلیک کردن روی دکمه " :actionText "  مشکل دارید ، آدرس زیر را در مرورگر وب خود کپی و جایگذاری کنید.'
 
 
 

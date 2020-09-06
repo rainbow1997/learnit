@@ -21,11 +21,11 @@ return
     'logout_text'=>'Logout',
     'Dashboard'=>'Dashboard',
     'youAreLoggedIn'=>'You are logged in !',
-    'app_copyright'=>'All right reserved.',
+    'app_copyright'=>'All right reserved.'.__('settings.app_name',[],app()->getLocale()),
     'welcome_pagetitle'=>'Welcome',
     'hello'=>'Hello',
     'Whoops'=>'Whoops!',
     'Regards'=>'Regards',
-    'email_click_trouble'=>'If you’re having trouble clicking the :btn "" button, copy and paste the URL below into your web browser'
+    'email_click_trouble'=>'If you’re having trouble clicking the ":actionText " button, copy and paste the URL below into your web browser'
 
 ];

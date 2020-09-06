@@ -1,10 +1,10 @@
 <?php
 return
 [
-    'greeting'=>'نام',
-        'email_subject'=>'خوش آمدید به '.config('app.app_name'),
+    'greeting'=>'متشکریم!',
+        'email_subject'=>'خوش آمدید به '.__('settings.app_name',[],app()->getLocale()),
     'email_title'=>'خوش آمدید',
-    'control_panel'=>'پنل کاربری',
+    'control_panel'=>'ورود به پنل کاربری',
 
     'message'=>'ما از ثبت نام شما مفتخریم.'
 

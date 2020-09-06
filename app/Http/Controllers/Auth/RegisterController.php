@@ -55,9 +55,29 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fname' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nationalcode' => ['required', 'digits:10'],
+            'birthdate' => ['required', 'date', 'max:255'],
+            'mobile' => ['required', 'digits_between:11,14'],
+            'secondMobile' => ['required', 'digits_between:11,14'],
+            'telephone' => ['required', 'digits_between:11,14'],
+            'webpage' => ['active_url', 'max:255'],
+            'education_place'=>['string','max:255'],
+            'study_field'=>['string','max:255'],
+            'study_orention'=>['string','max:255'],
+            'avatar'=>['file|size:2048','image']
+
+
+
+
+
+
+
+
+
         ]);
     }
 
@@ -69,10 +89,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user=User::create([
+            'fname' => $data['fname'],
+            'lname' => $data['lname'],
+            'nationalcode' => $data['nationalcode'],
+            'birthdate' => $data['birthdate'],
+            'mobile' => $data['mobile'],
+            'secondMobile' => $data['secondMobile'],
+            'telephone' => $data['telephone'],
+            'webpage' => $data['webpage'],
+            'education_place' => $data['education_place'],
+            'study_field' => $data['study_field'],
+            'study_orention' => $data['study_orention'],
+            'avatar' => $data['avatar'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        sendWelcomeNotification($user);
+        return $user;
+    }
+    private function sendWelcomeNotification(\App\User $user)
+    {
+        Notification::send($user,new sendWelcomeNotification(USER));
     }
 }

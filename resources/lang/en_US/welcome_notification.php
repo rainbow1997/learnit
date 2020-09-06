@@ -1,10 +1,10 @@
 <?php
 return
 [
-    'greeting'=>'#Appname',
-    'email_subject'=>'Welcome to'.config('app.app_name'),
+    'greeting'=>'Thanks a lot!',
+    'email_subject'=>'Welcome to'.__('settings.app_name',[],app()->getLocale()),
     'email_title'=>'Welcome',
-    'control_panel'=>'Control Panel',
+    'control_panel'=>'Log into control panel',
     'message'=>'We are pround of your registration. '
 
 ];

@@ -43,7 +43,11 @@ class welcomeNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
         ->from('no_reply@'.config('app.url'), 'No_Reply')
-        ->action('', url(app()->getLocale().'/home'));
+        ->greeting(__('welcome_notification.greeting',[],app()->getLocale()))
+        ->line(__('welcome_notification.email_subject'),[],app()->getLocale())
+        ->line(__('welcome_notification.message'),[],app()->getLocale())
+        //->view('vendor.notifications.email',['greeting'=>'GreetingSS'])
+        ->action(__('welcome_notification.control_panel',[],app()->getLocale()), url(app()->getLocale().'/home'));
         }
 
     /**
