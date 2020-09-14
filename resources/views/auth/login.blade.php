@@ -1,11 +1,12 @@
 @extends('layouts.app')
+@section('title',__('layout.login_text'))
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('layout.login_text')</div>
+                <div class="card-header text-center" >@lang('layout.login_text')</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login',app()->getLocale()) }}">
@@ -26,7 +27,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">@lang('layout.password')</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -40,11 +41,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-7 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
+                                    <input class="form-check-input mr-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                   &nbsp;
+                                    <label class="form-check-label mr-3" style="" for="remember">
                                         @lang('layout.remember_me')
                                     </label>
                                 </div>

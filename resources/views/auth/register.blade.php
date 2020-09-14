@@ -1,11 +1,21 @@
 @extends('layouts.app')
+@section('title',__('layout.register_text'))
 
 @section('content')
 <div class="container">
+@if(app()->getLocale()=="fa_IR")
+@push('scripts')
+    <script>
+        $(function() {
+            $("#birthdate, #birthdateSpan").persianDatepicker();       
+        });
+    </script>
+@endpush
+@endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">@lang('layout.register_text')</div>
+                <div class="card-header text-center">@lang('layout.register_text')</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register',app()->getLocale()) }}">
@@ -70,7 +80,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">@lang('layout.confirm_password')</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -95,7 +105,13 @@
                             <label for="birthdate" class="col-md-4 col-form-label text-md-right">@lang('layout.birthdate')</label>
 
                             <div class="col-md-6">
+                                @if(app()->getLocale()=="fa_IR")
+                                <input id="birthdate" type="text" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate') }}" required autocomplete="birthdate" autofocus>
+                                <span id="birthdateSpan"></span>
+
+                                @else
                                 <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" value="{{ old('birthdate') }}" required autocomplete="birthdate" autofocus>
+                                @endif
 
                                 @error('birthdate')
                                     <span class="invalid-feedback" role="alert">
@@ -124,7 +140,6 @@
 
                             <div class="col-md-6">
                                 <input id="secondMobile" type="tel" class="form-control @error('secondMobile') is-invalid @enderror" name="secondMobile" value="{{ old('secondMobile') }}" required autocomplete="secondMobile" autofocus>
-
                                 @error('secondMobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -134,7 +149,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tel" class="col-md-4 col-form-label text-md-right">@lang('layout.tel')</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right">@lang('layout.telephone')</label>
 
                             <div class="col-md-6">
                                 <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus>
@@ -201,13 +216,14 @@
                                 @enderror
                             </div>
                         </div>
-                        
+                        @yield('student_reg_content')
+                        @yield('teacher_reg_content')
 
-                        <div class="form-group row">
-                            <label for="avatar" class="col-md-4 col-form-label text-md-right">@lang('layout.avatar')</label>
+                        <div class="custom-file ">
+                            <label for="avatar" class="text-left custom-file-label col-md-10 offset-md-1" data-browse="@lang('layout.choose_file')" >@lang('layout.avatar')</label>
 
-                            <div class="col-md-6">
-                                <input id="avatar" type="image" class="form-control @error('avatar') is-invalid @enderror" name="avatar" value="{{ old('avatar') }}" required autocomplete="avatar" autofocus>
+                            <div class="col-md-1">
+                                <input id="avatar" type="file" class="custom-file-input  @error('avatar') is-invalid @enderror" lang="<?php echo app()->getLocale(); ?>" name="avatar" value="{{ old('avatar') }}" required autocomplete="avatar"  autofocus>
 
                                 @error('avatar')
                                     <span class="invalid-feedback" role="alert">
@@ -217,8 +233,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row mt-5">
+                            <div class="col-md-6 offset-md-5">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('layout.register_text')
                                 </button>

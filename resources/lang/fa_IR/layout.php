@@ -1,6 +1,9 @@
 <?php
 return 
 [
+    'font_family'=>'B Yekan',
+    'text-align'=>'right',
+
     'app_name'=>'لرنیت',
     'home'=>'صفحه اصلی',
     'username'=>'نام کاربری',
@@ -30,7 +33,21 @@ return
     'hello'=>'درود !',
     'Whoops'=>'متاسفیم!',
     'Regards'=>'همیار شما',
-    'email_click_trouble'=>'اگر با کلیک کردن روی دکمه " :actionText "  مشکل دارید ، آدرس زیر را در مرورگر وب خود کپی و جایگذاری کنید.'
+    'email_click_trouble'=>'اگر با کلیک کردن روی دکمه " :actionText "  مشکل دارید ، آدرس زیر را در مرورگر وب خود کپی و جایگذاری کنید.',
+    'fname'=>'نام',
+    'lname'=>'نام خانوادگی',
+    'nationalcode'=>'کدملی',
+    'birthdate'=>'تاریخ تولد',
+    'mobile'=>'تلفن همراه',
+    'secondMobile'=>'تلفن همراه پشتیبان',
+    'telephone'=>'تلفن',
+    'webpage'=>'آدرس صفحه وب',
+    'education_place'=>'محل تحصیل',
+    'study_field'=>'رشته تحصیلی',
+    'study_orention'=>'گرایش تحصیلی',
+    'avatar'=>'تصویر پرسنلی',
+    'confirm_password'=>'درج مجدد گذرواژه',
+    'choose_file'=>'انتخاب فایل'
 
 
 

@@ -12,4 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+.js('resources/js/persianDatepicker.min.js','public/js/persianDatepicker.min.js')
+.styles(['resources/plainCSS/persianDatepicker-default.css','resources/plainCSS/rtl-template.css'],'public/css/rtl.css')
+.sass('resources/sass/app.scss', 'public/css');

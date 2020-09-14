@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Users\User as User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -24,6 +24,10 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    /*
+    user Object that get object name from user input(userType)
+    */
+    private $userObj;
     /**
      * Where to redirect users after registration.
      *
@@ -41,6 +45,8 @@ class RegisterController extends Controller
         //$this->redirectTo=$this->redirectTo();
 
         $this->middleware('guest');
+        $this->userObj=$data['userType'];
+
     }
     public function redirectTo()
     {
@@ -54,12 +60,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+         $result=Validator::make($data, [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nationalcode' => ['required', 'digits:10'],
+            'person_type'=>['required','in_array:User::getAllTypes()'],
             'birthdate' => ['required', 'date', 'max:255'],
             'mobile' => ['required', 'digits_between:11,14'],
             'secondMobile' => ['required', 'digits_between:11,14'],
@@ -68,17 +75,17 @@ class RegisterController extends Controller
             'education_place'=>['string','max:255'],
             'study_field'=>['string','max:255'],
             'study_orention'=>['string','max:255'],
-            'avatar'=>['file|size:2048','image']
-
-
-
-
-
+            'avatar'=>['file|size:2048','image'],
 
 
 
 
         ]);
+
+        //special validation for each class(userType)
+        array_merge($result,$this->userObj::getLocalValidation());
+
+        return $result;
     }
 
     /**
@@ -89,7 +96,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user=User::create([
+        $userObj='App\Users\\'.$data;
+        //$userObj::create([
+        $userObjArray=[
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'nationalcode' => $data['nationalcode'],
@@ -104,9 +113,15 @@ class RegisterController extends Controller
             'avatar' => $data['avatar'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
-        sendWelcomeNotification($user);
-        return $user;
+        ];
+        //assign local fillableItem into create static method of UsersObject
+        foreach($userObj::getFillableItemKeys() as $item)
+        {
+            $userObjArray[$item]=$data[$item];
+        }
+        $userObj::create($userObjArray);
+        sendWelcomeNotification($userObj);
+        return $userObj;
     }
     private function sendWelcomeNotification(\App\User $user)
     {

@@ -3,7 +3,7 @@
 @section('content')
       
 
-            <div class="content">
+            <div class="container">
                 <div class="title m-b-md">
                     @lang('message.welcome_title')
                 </div>

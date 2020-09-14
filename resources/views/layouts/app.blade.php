@@ -9,17 +9,24 @@
 
     <title>@lang('layout.app_name')-@yield('title')</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts move to before of the body -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    @if(App::isLocale('fa_IR'))
+            <link rel='stylesheet' type='text/css' href='http://awebfont.ir/css?id=1116'>
+            <link href="{{ mix('css/rtl.css') }}" rel="stylesheet">
+
+        @else
+            <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        @endif
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -30,13 +37,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-1">
+                    <ul class="navbar-nav  row">
                     @foreach(config('app.all_locales') as $locale)
-                        <li class="w-25 h-25">
+                        <li class="col-sm-4">
                         <a class="nav-link" href="{{url('/'.$locale)}}">
-                        <img width="100px" src="{{ asset('images/'.$locale.'.ico') }}" alt="{{$locale}}" class="img-fluid">
+                        <img width="60px" src="{{ asset('images/'.$locale.'.ico') }}" alt="{{$locale}}" class="">
                      </a>
                         </li>
                     @endforeach
@@ -83,12 +90,19 @@
             </div>
         </nav>
        
-        <main class="py-4">
+        <main class="py-5 my-4">
             <div class="container">
             @yield('content')
             </div>
-            <div class="text-center text-danger">@lang('layout.app_copyright')</div>
+            <div class="row"></div>
+            <h5 class="text-center  mt-5 pt-3" style="color:#A09F9F;">@lang('layout.app_copyright')</h5>
         </main>
     </div> <!-- yield get data and section send data to yield-->
+    <script src="{{ mix('js/app.js') }}" ></script>
+
+    <script src="{{ mix('js/persianDatepicker.min.js') }}" ></script>
+    @stack('scripts')
+
+
 </body>
 </html>

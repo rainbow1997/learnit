@@ -1,8 +1,10 @@
 <?php
 return 
 [
+    'font_family'=>'Nunito, sans-serif',
     'app_name'=>'Learnit',
     'home'=>'Home',
+    'text-align'=>'left',
     'username'=>'Username',
     'password'=>'Password',
     'email'=>'Email',
@@ -21,11 +23,27 @@ return
     'logout_text'=>'Logout',
     'Dashboard'=>'Dashboard',
     'youAreLoggedIn'=>'You are logged in !',
-    'app_copyright'=>'All right reserved.'.__('settings.app_name',[],app()->getLocale()),
+    'app_copyright'=>'Copyright 2020 by '.__('settings.app_name',[],app()->getLocale()).'. All Rights Reserved.',
     'welcome_pagetitle'=>'Welcome',
     'hello'=>'Hello',
+    'choose_file'=>'Browse',
     'Whoops'=>'Whoops!',
     'Regards'=>'Regards',
-    'email_click_trouble'=>'If you’re having trouble clicking the ":actionText " button, copy and paste the URL below into your web browser'
+    'email_click_trouble'=>'If you’re having trouble clicking the ":actionText " button, copy and paste the URL below into your web browser',
+    'fname'=>'Firstname',
+    'lname'=>'Lastname',
+    'nationalcode'=>'Nationalcode',
+    'birthdate'=>'Birthdate',
+    'mobile'=>'Mobile',
+    'secondMobile'=>'Secondary Mobile',
+    'telephone'=>'Telephone',
+    'webpage'=>'Web page',
+    'education_place'=>'education_place',
+    'study_field'=>'Study field',
+    'study_orention'=>'Study orention',
+    'avatar'=>'Avatar Image',
+    'confirm_password'=>'Confirm Password'
+
+
 
 ];
