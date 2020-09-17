@@ -1,5 +1,5 @@
 <?php
-namespace Users;
+namespace App\Users;
 class Student extends User implements Learner,CentralInterface
 {
     private $learnerFillable=

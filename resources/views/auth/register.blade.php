@@ -3,13 +3,46 @@
 
 @section('content')
 <div class="container">
+@push('scripts')
+<script>
+    $("#userType").change(function()
+    {
+        var selected=$("#userType").val();
+          $.ajax({
+                type:'POST',
+                url:'ajaxShowUserTypeRegForm/',
+                data:{_token: "{{ csrf_token() }}",selectVal:selected
+                },
+                success: function( response ) {
+                   // alert(response);
+                   $("#userTypeDedicatedDiv").hide().one();
+
+                    $("#userTypeDedicatedDiv").html(response);   
+                    $("#userTypeDedicatedDiv").show("slow");
+
+             
+                }
+           });
+
+        // 
+        // $.get("ajaxShowUserTypeRegForm/".selected,function(data,status)
+        // {
+        //     alert(data);
+        // });
+    });  
+</script>
+@endpush
 @if(app()->getLocale()=="fa_IR")
 @push('scripts')
     <script>
         $(function() {
-            $("#birthdate, #birthdateSpan").persianDatepicker();       
+            $("#birthdate, #birthdateSpan").persianDatepicker();    
+           
         });
-    </script>
+        
+   
+                       
+                        </script>
 @endpush
 @endif
     <div class="row justify-content-center">
@@ -100,7 +133,32 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="userType" class="col-md-4 col-form-label text-md-right">@lang('layout.userType')</label>
 
+                            <div class="col-md-6">
+                                <select id="userType" class="custom-select form-control @error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                <option value="None"> @lang("layout.choose_option") </option>
+
+                                    @foreach(\App\Users\User::getAllTypes() as $type)
+                                    <option value="{{ $type}}"> @lang("layout.$type") </option>
+
+                                    @endforeach
+                                    </select>
+                                    
+                                @error('userType')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        
+                            </div>
+                        </div>
+                        
+                        <div id="userTypeDedicatedDiv" class="">
+
+                        </div>
+                      
                         <div class="form-group row">
                             <label for="birthdate" class="col-md-4 col-form-label text-md-right">@lang('layout.birthdate')</label>
 
@@ -216,8 +274,7 @@
                                 @enderror
                             </div>
                         </div>
-                        @yield('student_reg_content')
-                        @yield('teacher_reg_content')
+                   
 
                         <div class="custom-file ">
                             <label for="avatar" class="text-left custom-file-label col-md-10 offset-md-1" data-browse="@lang('layout.choose_file')" >@lang('layout.avatar')</label>

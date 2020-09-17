@@ -1,6 +1,6 @@
 <?php
 
-namespace Users;
+namespace App\Users;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,15 +46,7 @@ class User extends Authenticatable
     //Learnit functions
     protected static function getAllTypes()
     {
-        $allTypes=[];
-        $i=0;
-        foreach(glob($usersDirectory.'/*.php') as $file)
-        //glob — Find pathnames matching a pattern
-        {
-            $allTypes[$i]=$file;
-            $i++;
-        }
-        return $allTypes;
+        return config('auth.account_types');
         
     }
     public function getLocalValidation()

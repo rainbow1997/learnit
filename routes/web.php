@@ -36,6 +36,7 @@ Route::prefix('{locale}')->group(function(){
   });
   Auth::routes();
   Route::get('/home','HomeController@index');
+  Route::post('ajaxShowUserTypeRegForm/','Auth\RegisterController@ajaxShowUserTypeRegForm');
   Route::get('/testEmail',function()
   {
     $user=UserClass::find(1);

@@ -3,9 +3,13 @@ return
 [
     'font_family'=>'B Yekan',
     'text-align'=>'right',
-
+    'student'=>'دانشجو',
+    'teacher'=>'مدرس',
     'app_name'=>'لرنیت',
     'home'=>'صفحه اصلی',
+    'userType'=>'نوع حساب کاربری',
+    'choose_option'=>'لطفا انتخاب کنید.',
+
     'username'=>'نام کاربری',
     'password'=>'گذرواژه',
     'email'=>'ایمیل',

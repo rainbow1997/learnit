@@ -1,7 +1,10 @@
 <?php
 
 return [
-
+    /*
+    Our Users Acoount Types List (without interfaces class in App\Users)
+    */
+    'account_types'=>['teacher','student'],
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

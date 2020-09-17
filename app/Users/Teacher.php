@@ -1,5 +1,5 @@
 <?php
-namespace Users;
+namespace App\Users;
 class Teacher extends User implements Official,CentralInterface
 {
     private $teacherFillable=

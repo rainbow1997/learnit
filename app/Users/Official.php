@@ -1,5 +1,5 @@
 <?php
-namespace Users;
+namespace App\Users;
 interface Official
 {
     public function setPersonalCode();

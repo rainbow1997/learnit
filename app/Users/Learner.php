@@ -1,5 +1,5 @@
 <?php
-namespace Users;
+namespace App\Users;
 interface Learner 
 {
     public function setLearnerCode();

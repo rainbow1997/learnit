@@ -8,7 +8,7 @@ use App\Users\User as User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -40,12 +40,12 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         //$this->redirectTo=$this->redirectTo();
 
         $this->middleware('guest');
-        $this->userObj=$data['userType'];
+        $this->userObj=$request->input('userType');
 
     }
     public function redirectTo()
@@ -123,8 +123,24 @@ class RegisterController extends Controller
         sendWelcomeNotification($userObj);
         return $userObj;
     }
-    private function sendWelcomeNotification(\App\User $user)
+    private function sendWelcomeNotification()
+        //\App\User $user)
     {
-        Notification::send($user,new sendWelcomeNotification(USER));
+        Notification::send($this->userObj,new sendWelcomeNotification(USER));
     }
+    public function ajaxShowUserTypeRegForm(Request $request)
+    ////$locale is for fixing the bug because one variable 
+    //just get locale variable from route 
+    {
+        if(in_array($request->input('selectVal'),config('auth.account_types'),TRUE))
+        {
+
+          //  return 'sdf';
+          //return ("auth/register_".$request->input('selectVal'));
+          return view("auth/register_".$request->input('selectVal'))->render();
+        }
+        else
+            return 'Error from input that sent.';
+    }   
+    
 }
