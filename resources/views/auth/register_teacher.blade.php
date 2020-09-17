@@ -1,7 +1,7 @@
     <div class="row jumbotron">
         <div class="col text-info">
-        فیلد مجزایی برای ثبت نام شما به عنوان مدرس تغریف نشده است
+        @lang('register_teacher.no_field')
         <br/>
-        همینک ثبت نام خود را نهایی کنید.
+        @lang('register_teacher.register_now')
         </div>
     </div>

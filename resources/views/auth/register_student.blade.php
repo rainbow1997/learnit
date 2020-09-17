@@ -1,7 +1,7 @@
-    <div class="row jumbotron">
+<div class="row jumbotron">
         <div class="col text-info">
-        فیلد مجزایی برای ثبت نام شما به عنوان دانشجو تغریف نشده است
+        @lang('register_student.no_field')
         <br/>
-        همینک ثبت نام خود را نهایی کنید.
+        @lang('register_student.register_now')
         </div>
     </div>

@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         
-                        <div id="userTypeDedicatedDiv" class="">
+                        <div id="userTypeDedicatedDiv">
 
                         </div>
                       
