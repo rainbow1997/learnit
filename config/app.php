@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://server.mostafajamali.ir'),
+    'url' => env('APP_URL', 'https://learnit.amnpardazan.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -130,7 +130,7 @@ return [
     |
     */
     'all_locales'=>['en_US','fa_IR'],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -141,7 +141,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
- 
+
 
     'providers' => [
 

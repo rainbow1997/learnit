@@ -52,7 +52,7 @@
                     <!-- Right Side Of Navbar -->
                     @if(App::isLocale('fa_IR'))
                         <ul class="navbar-nav mr-auto">
-                    @else 
+                    @else
                     <ul class="navbar-nav ml-auto">
                     @endif
                         <!-- Authentication Links -->
@@ -62,13 +62,13 @@
                             </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register',app()->getLocale()) }}">@lang('layout.register_text')</a>
-                                </li>                            
+                                </li>
                         @endguest
                         @auth
 
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+{{-- }}{{ Auth::user()->name }} --}}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </nav>
-       
+
         <main class="py-5 my-4">
             <div class="container">
             @yield('content')

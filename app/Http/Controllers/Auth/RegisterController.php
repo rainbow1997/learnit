@@ -92,7 +92,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return App\Users\User
      */
     protected function create(array $data)
     {
@@ -129,8 +129,8 @@ class RegisterController extends Controller
         Notification::send($this->userObj,new sendWelcomeNotification(USER));
     }
     public function ajaxShowUserTypeRegForm(Request $request)
-    ////$locale is for fixing the bug because one variable 
-    //just get locale variable from route 
+    ////$locale is for fixing the bug because one variable
+    //just get locale variable from route
     {
         if(in_array($request->input('selectVal'),config('auth.account_types'),TRUE))
         {
@@ -141,6 +141,6 @@ class RegisterController extends Controller
         }
         else
             return 'Error from input that sent.';
-    }   
-    
+    }
+
 }

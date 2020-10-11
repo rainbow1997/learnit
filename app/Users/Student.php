@@ -1,10 +1,13 @@
 <?php
 namespace App\Users;
-class Student extends User implements Learner,CentralInterface
+class Student extends User implements Learner
 {
+    protected $_table='student_users';
+    protected $guard='student';
+
     private $learnerFillable=
     ['learnerCode'];
-    
+
     public static function getLocalValidation()
     {
     //this function passed to Register Controller
@@ -13,18 +16,18 @@ class Student extends User implements Learner,CentralInterface
             'learnerCode'=>['required','digits:9']
         ];
         return $validationItem;
-      
-     
+
+
     }
     public function __construct()
     {
     }
 
-    protected function setLocaleFillable()
+    public function setLocaleFillable()
     {
         mergeSelfFillableToParent();
     }
-    protected function getLocaleFillable()
+    public function getLocaleFillable()
     {
         return
             $this->learnerFillable;
@@ -44,7 +47,7 @@ class Student extends User implements Learner,CentralInterface
          $this->learnerFillable['learnerCode'];
     }
 
-    
+
     private function mergeSelfFillableToParent()
     {
         return

@@ -1,27 +1,29 @@
 <?php
 namespace App\Users;
-class Teacher extends User implements Official,CentralInterface
+class Teacher extends User implements Official
 {
+    protected $_table='teacher_o_u';
+    protected $guard='teacher';
     private $teacherFillable=
     ['personnelCode'];
 
 
-    protected function getLocalValidation()
+    public static function getLocalValidation()
     {
     //this function passed to Register Controller
-    
+
         $validationItem=[
             'personnelCode'=>['required','digits:9']
         ];
         return $validationItem;
-      
-     
+
+
     }
-    protected function getFillableItemKeys()
+    public function getFillableItemKeys()
     {
         return array_keys($this->$teacherFillable);
     }
-    protected function setLocaleFillable()
+    public function setLocaleFillable()
     {
         mergeSelfFillableToParent();
     }
@@ -29,7 +31,7 @@ class Teacher extends User implements Official,CentralInterface
     {
         return
             $this->teacherFillable;
-    }    
+    }
 
 
     public function setPersonnelCode()
@@ -38,7 +40,7 @@ class Teacher extends User implements Official,CentralInterface
     }
     public function getPersonnelCode()
     {
-        return 
+        return
           $this->teacherFillable['personnelCode'];
     }
 

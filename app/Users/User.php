@@ -6,14 +6,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable 
+abstract class User extends Authenticatable
 {
     use Notifiable;
-    
+
     //It's important that all files for view or etc should follow its owner lower  name
     //ex:register.blade.php Is Original then we have register.student.blade.php
-    
-    
+    protected $table='users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,15 +44,16 @@ class User extends Authenticatable
     ];
 
     //Learnit functions
-    protected static function getAllTypes()
+    public static function getAllTypes()
     {
         return config('auth.account_types');
-        
+
     }
-    public function getLocalValidation()
-    {
-    }
-    public function getFillableItemKeys()
-    {
-    }
+
+    public abstract function setLocaleFillable();
+    public abstract function getLocaleFillable();
+    public abstract static function getLocalValidation();
+    public abstract function getFillableItemKeys();
+
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckLanguage;
-use App\User as UserClass;
+use App\Users\User as UserClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Auth;
 */
 //cookie set cookie()-queue()
 //cookie get request()->cookie()
- Route::get('/', function () 
+ Route::get('/', function ()
 {
- 
+
      return redirect(App::getLocale().'/welcome');
-  
+
 })->middleware(CheckLanguage::class);
 
 Route::prefix('{locale}')->group(function(){

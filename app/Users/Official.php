@@ -2,6 +2,6 @@
 namespace App\Users;
 interface Official
 {
-    public function setPersonalCode();
-    public function getPersonalCode();
+    public function setPersonnelCode();
+    public function getPersonnelCode();
 }
