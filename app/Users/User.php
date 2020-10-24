@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-abstract class User extends Authenticatable
+class User extends Authenticatable
 {
     use Notifiable;
 
@@ -44,16 +44,22 @@ abstract class User extends Authenticatable
     ];
 
     //Learnit functions
+
     public static function getAllTypes()
     {
         return config('auth.account_types');
 
     }
 
-    public abstract function setLocaleFillable();
-    public abstract function getLocaleFillable();
-    public abstract static function getLocalValidation();
-    public abstract function getFillableItemKeys();
+//    public abstract function setLocaleFillable();
+//    public abstract function getLocaleFillable();
+//    public abstract static function getLocalValidation();
+//    public abstract function getFillableItemKeys();
+
+    public function userable()
+    {
+        return $this->morphTo();
+    }
 
 
 }

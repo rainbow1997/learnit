@@ -1,11 +1,14 @@
 <?php
 namespace App\Users;
-class Student extends User implements Learner
+class Student extends Learner
 {
-    protected $_table='student_users';
-    protected $guard='student';
 
-    private $learnerFillable=
+    public function learner()
+    {
+         return $this->morphOne('App\Users\Learner','learnerable');
+    }
+
+    public static $learnerFillable=
     ['learnerCode'];
 
     public static function getLocalValidation()
@@ -23,35 +26,35 @@ class Student extends User implements Learner
     {
     }
 
-    public function setLocaleFillable()
+    public static function setLocaleFillable()
     {
         mergeSelfFillableToParent();
     }
-    public function getLocaleFillable()
+    public static function getLocaleFillable()
     {
         return
-            $this->learnerFillable;
+            self::$learnerFillable;
     }
-    public function getFillableItemKeys()
+    public static function getFillableItemKeys()
     {
-        return array_keys($this->learnerFillable);
+        return array_keys(self::$learnerFillable);
     }
 
-    public function setLearnercode()
+    public static function setLearnercode()
     {
-        $this->learnerFillable['learnerCode']=substr(md5(microtime().rand()),9);
+        self::$learnerFillable['learnerCode']=substr(md5(microtime().rand()),9);
     }
-    public function getLearnercode()
+    public static function getLearnercode()
     {
         return
-         $this->learnerFillable['learnerCode'];
+         self::$leatearnerFillable['learnerCode'];
     }
 
 
-    private function mergeSelfFillableToParent()
+    public static function mergeSelfFillableToParent()
     {
         return
-            array_merge(parent::$fillable,$this->learnerFillable);
+            array_merge(parent::$fillable,self::$learnerFillable);
 
     }
 }

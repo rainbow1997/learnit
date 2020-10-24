@@ -1,12 +1,14 @@
 <?php
 namespace App\Users;
-class Teacher extends User implements Official
+class Teacher extends Official
 {
-    protected $_table='teacher_o_u';
-    protected $guard='teacher';
-    private $teacherFillable=
+    public static $teacherFillable=
     ['personnelCode'];
-
+    //moshkel extendaro hal kon
+    public function official()
+    {
+        return $this->morphOne('App\Users\Official','officialable');
+    }
 
     public static function getLocalValidation()
     {
@@ -19,36 +21,36 @@ class Teacher extends User implements Official
 
 
     }
-    public function getFillableItemKeys()
+    public static function getFillableItemKeys()
     {
-        return array_keys($this->$teacherFillable);
+        return array_keys(self::$teacherFillable);
     }
-    public function setLocaleFillable()
+    public static function setLocaleFillable()
     {
         mergeSelfFillableToParent();
     }
-    public function getLocaleFillable()
+    public static function getLocaleFillable()
     {
         return
-            $this->teacherFillable;
+            self::$teacherFillable;
     }
 
 
-    public function setPersonnelCode()
+    public static function setPersonnelCode()
     {
-        $this->teacherFillable['personnelCode']=substr(md5(microtime().rand()),6);
+        self::$teacherFillable['personnelCode']=substr(md5(microtime().rand()),6);
     }
-    public function getPersonnelCode()
+    public static function getPersonnelCode()
     {
         return
-          $this->teacherFillable['personnelCode'];
+            self::$teacherFillable['personnelCode'];
     }
 
 
-    private function mergeSelfFillableToParent()
+    public static function mergeSelfFillableToParent()
     {
         return
-            array_merge(parent::$fillable,$this->teacherFillable);
+            array_merge(parent::$fillable,self::$teacherFillable);
 
     }
 }
