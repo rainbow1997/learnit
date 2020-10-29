@@ -5,6 +5,7 @@ namespace App\Users;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth as Auth;
 
 class User extends Authenticatable
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fname','lname', 'email', 'password','nationalcode','birthdate',
-        'mobile','secondMobile','telephone','webpage','education_place','study_field',
+        'mobile','second_mobile','telephone','webpage','education_place','study_field',
         'study_orention','avatar'
     ];
 
@@ -44,6 +45,16 @@ class User extends Authenticatable
     ];
 
     //Learnit functions
+    public function __construct(array $regData=[],object $userObj=null)
+    {
+        if($userObj!=NULL) {
+            $this->setUserableIdAttribute($userObj->id);
+            $this->setUserableTypeAttribute(get_class($userObj));
+        }
+        parent::__construct($regData);
+
+    }
+
 
     public static function getAllTypes()
     {
@@ -61,5 +72,25 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+
+
+    public function setUserableIdAttribute($id)
+    {
+        $this->attributes['userable_id']=$id;
+    }
+    public function setUserableTypeAttribute($type)
+    {
+        $this->attributes['userable_type']=$type;
+    }
+
+    public static function create(object $userObj,array $regData)//chon teacher null mire behesh az register Controller
+    {
+
+        $user=new User($regData,$userObj);
+        $copy=clone $user;
+        $user->save();
+        return true;
+        // $/user->create($userObj);
+    }
 
 }

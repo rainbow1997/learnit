@@ -2,8 +2,44 @@
 namespace App\Users;
 class Teacher extends Official
 {
-    public static $teacherFillable=
-    ['personnelCode'];
+    protected $table='teachers';
+
+    //public static $teacherFillable=null;
+  //  public static $teacherFillable=['personnelCode'=>null
+  //  ];
+//    public static function create($data)
+//    {
+//        parent::create($data);
+//        die('injast');
+//
+//    }
+    public function setPersonnelCodeAttributes()
+    {
+        $this->attributes['personnel_code']=$this->setPersonnelCode();
+    }
+    public function getPersonnelCodeAttributes()
+    {
+        return $this->attributes['personnel_code'];
+    }
+    public function __construct()
+    {
+
+    $this->setPersonnelCodeAttribute();
+    }
+    public static function create(object $userObj,array $regData)
+    {
+    $userObj->save();
+    parent::create($userObj,$regData);
+
+    }
+    //accessor get mutrator set
+    public function setPersonnelCodeAttribute()
+    {
+       $this->attributes['personnel_code']=$this->setPersonnelCode();
+
+    }
+
+
     //moshkel extendaro hal kon
     public function official()
     {
@@ -21,9 +57,13 @@ class Teacher extends Official
 
 
     }
+
     public static function getFillableItemKeys()
     {
-        return array_keys(self::$teacherFillable);
+        //die('ingetItemKey'.var_dump(self::$teacherFillable));
+        if(isset(self::$teacherFillable))
+          return array_keys(self::$teacherFillable);
+        return FALSE;
     }
     public static function setLocaleFillable()
     {
@@ -36,14 +76,9 @@ class Teacher extends Official
     }
 
 
-    public static function setPersonnelCode()
+    protected function setPersonnelCode()
     {
-        self::$teacherFillable['personnelCode']=substr(md5(microtime().rand()),6);
-    }
-    public static function getPersonnelCode()
-    {
-        return
-            self::$teacherFillable['personnelCode'];
+      return rand(13990807,14500000);
     }
 
 

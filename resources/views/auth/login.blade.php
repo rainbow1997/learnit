@@ -39,27 +39,27 @@
                                 @enderror
                             </div>
                         </div>
-				  <div class="form-group row ">
-                      <label for="userType" class="col-md-4 col-form-label text-md">نوع کاربری شما : </label>
+{{--				  <div class="form-group row ">--}}
+{{--                      <label for="person_type" class="col-md-4 col-form-label text-md">نوع کاربری شما : </label>--}}
 
-                            <div class="col-md-6">
-                                <select id="userType" class="custom-select form-control" >
-                                <option value="None"> @lang("layout.choose_option") </option>
+{{--                            <div class="col-md-6">--}}
+{{--                                <select id="person_type" class="custom-select form-control" name="person_type" >--}}
+{{--                                <option value="None"> @lang("layout.choose_option") </option>--}}
 
-                                    @foreach(\App\Users\User::getAllTypes() as $type)
-                                    <option value="{{ $type}}"> @lang("layout.$type") </option>
+{{--                                    @foreach(\App\Users\User::getAllTypes() as $type)--}}
+{{--                                    <option value="{{ $type}}"> @lang("layout.$type") </option>--}}
 
-                                    @endforeach
-                                    </select>
+{{--                                    @endforeach--}}
+{{--                                    </select>--}}
 
-                                @error('userType')
-      <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+{{--                                @error('person_type')--}}
+{{--      <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
 
-                            </div>
-                        </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="form-group row">
                             <div class="col-md-7 offset-md-4">
                                 <div class="form-check">

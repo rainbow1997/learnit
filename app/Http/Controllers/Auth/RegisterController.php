@@ -7,7 +7,11 @@ use App\Providers\RouteServiceProvider;
 use App\Users\User as User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth as Auth;
+
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
@@ -45,8 +49,8 @@ class RegisterController extends Controller
         //$this->redirectTo=$this->redirectTo();
 
         $this->middleware('guest');
-        $this->userObj=$request->input('userType');
 
+    //die($this->userObj);
     }
     public function redirectTo()
     {
@@ -60,32 +64,39 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-         $result=Validator::make($data, [
+        if(in_array(request()->input('person_type'),config('auth.account_types'),TRUE))
+            $this->userObj='App\Users\\'.ucfirst(request()->input('person_type'));
+        else
+            abort(500,'userType is wrong');
+        $usersType=\App\Users\User::getAllTypes();
+         $result=[
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nationalcode' => ['required', 'digits:10'],
-            'person_type'=>['required','in_array:User::getAllTypes()'],
+            //'person_type'=>['required','in:'.implode(',',$usersType)],
             'birthdate' => ['required', 'date', 'max:255'],
             'mobile' => ['required', 'digits_between:11,14'],
-            'secondMobile' => ['required', 'digits_between:11,14'],
+            'second_mobile' => ['required', 'digits_between:11,14'],
             'telephone' => ['required', 'digits_between:11,14'],
             'webpage' => ['active_url', 'max:255'],
             'education_place'=>['string','max:255'],
             'study_field'=>['string','max:255'],
             'study_orention'=>['string','max:255'],
-            'avatar'=>['file|size:2048','image'],
+           // 'avatar'=>['file|size:2048']
 
 
 
 
-        ]);
+        ];
 
         //special validation for each class(userType)
+
         array_merge($result,$this->userObj::getLocalValidation());
 
-        return $result;
+         return Validator::make($data, $result);
+
     }
 
     /**
@@ -96,15 +107,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $userObj='App\Users\\'.$data;
-        //$userObj::create([
-        $userObjArray=[
+        //die('oomadinja');
+        $userClass='App\Users\\'.ucfirst($data['person_type']);//set class from variable's name
+        $regData=[
             'fname' => $data['fname'],
             'lname' => $data['lname'],
             'nationalcode' => $data['nationalcode'],
             'birthdate' => $data['birthdate'],
             'mobile' => $data['mobile'],
-            'secondMobile' => $data['secondMobile'],
+            'second_mobile' => $data['second_mobile'],
             'telephone' => $data['telephone'],
             'webpage' => $data['webpage'],
             'education_place' => $data['education_place'],
@@ -112,21 +123,30 @@ class RegisterController extends Controller
             'study_orention' => $data['study_orention'],
             'avatar' => $data['avatar'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['password'])
         ];
         //assign local fillableItem into create static method of UsersObject
-        foreach($userObj::getFillableItemKeys() as $item)
-        {
-            $userObjArray[$item]=$data[$item];
-        }
-        $userObj::create($userObjArray);
-        sendWelcomeNotification($userObj);
-        return $userObj;
+        //die(var_dump($userObj::getFillableItemKeys()));
+
+
+        if($userClass::getFillableItemKeys()!=FALSE)
+            foreach($userClass::getFillableItemKeys() as $item)
+            {
+                $regData[$item]=$data[$item];
+
+            }
+
+       // $user=$userClass::create(new $userClass,$regData);
+            //sendWelcomeNotification($user);
+        $user=new $userClass;
+        $user->create(new $userClass,$regData);
+return $user;
+
     }
-    private function sendWelcomeNotification()
+    public function sendWelcomeNotification(object $user)
         //\App\User $user)
     {
-        Notification::send($this->userObj,new sendWelcomeNotification(USER));
+      //  Notification::send($user,new Notification\welcomeNotification);
     }
     public function ajaxShowUserTypeRegForm(Request $request)
     ////$locale is for fixing the bug because one variable

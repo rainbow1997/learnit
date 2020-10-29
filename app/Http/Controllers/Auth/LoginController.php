@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request as Request;
+use Illuminate\Support\Facades\Validator as Validator;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth as Auth;
 
 class LoginController extends Controller
 {
@@ -39,7 +41,30 @@ class LoginController extends Controller
     }
     public function __construct()
     {
+
         //$this->redirectTo=$this->redirectTo();
         $this->middleware('guest')->except('logout');
+    }
+    public function validator(array $data)
+    {
+        $rules=[
+          'email'=>['required','string','email'],
+          'password'=>['required','string','min:8']
+        ];
+        return Validator::make($data,$rules);
+    }
+    public function create(Request $request)
+    {
+
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'], 'status' => 1])) {
+            // The user is active, not suspended, and exists.
+            $this->redirectTo();
+        }
+
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

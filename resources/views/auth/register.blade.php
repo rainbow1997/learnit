@@ -5,9 +5,9 @@
 <div class="container">
 @push('scripts')
 <script>
-    $("#userType").change(function()
+    $("#person_type").change(function()
     {
-        var selected=$("#userType").val();
+        var selected=$("#person_type").val();
           $.ajax({
                 type:'POST',
                 url:'ajaxShowUserTypeRegForm/',
@@ -17,31 +17,31 @@
                    // alert(response);
                    $("#userTypeDedicatedDiv").hide().one();
 
-                    $("#userTypeDedicatedDiv").html(response);   
+                    $("#userTypeDedicatedDiv").html(response);
                     $("#userTypeDedicatedDiv").show("slow");
 
-             
+
                 }
            });
 
-        // 
+        //
         // $.get("ajaxShowUserTypeRegForm/".selected,function(data,status)
         // {
         //     alert(data);
         // });
-    });  
+    });
 </script>
 @endpush
 @if(app()->getLocale()=="fa_IR")
 @push('scripts')
     <script>
         $(function() {
-            $("#birthdate, #birthdateSpan").persianDatepicker();    
-           
+            $("#birthdate, #birthdateSpan").persianDatepicker();
+
         });
-        
-   
-                       
+
+
+
                         </script>
 @endpush
 @endif
@@ -51,6 +51,12 @@
                 <div class="card-header text-center">@lang('layout.register_text')</div>
 
                 <div class="card-body">
+                    @auth
+                        کاربر عزیز
+                        {{Auth::user()->fname}}
+                        شما از قبل ثبت نام کرده اید!
+                    @endauth
+                    @guest
                     <form method="POST" action="{{ route('register',app()->getLocale()) }}">
                         @csrf
 
@@ -58,7 +64,7 @@
                             <label for="fname" class="col-md-4 col-form-label text-md-right">@lang('layout.fname')</label>
 
                             <div class="col-md-6">
-                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="name" value="{{ old('fname') }}" required autocomplete="name" autofocus>
+                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="name" autofocus>
 
                                 @error('fname')
                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +88,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">@lang('layout.email')</label>
@@ -134,10 +140,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="userType" class="col-md-4 col-form-label text-md-right">@lang('layout.userType')</label>
+                            <label for="person_type" class="col-md-4 col-form-label text-md-right">@lang('layout.userType')</label>
 
                             <div class="col-md-6">
-                                <select id="userType" class="custom-select form-control @error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                <select id="person_type" class="custom-select form-control @error('person_type') is-invalid @enderror" name="person_type" value="{{ old('person_type') }}" required autocomplete="person_type" autofocus>
                                 <option value="None"> @lang("layout.choose_option") </option>
 
                                     @foreach(\App\Users\User::getAllTypes() as $type)
@@ -145,20 +151,20 @@
 
                                     @endforeach
                                     </select>
-                                    
-                                @error('userType')
+
+                                @error('person_type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                        
+
                             </div>
                         </div>
-                        
+
                         <div id="userTypeDedicatedDiv">
 
                         </div>
-                      
+
                         <div class="form-group row">
                             <label for="birthdate" class="col-md-4 col-form-label text-md-right">@lang('layout.birthdate')</label>
 
@@ -194,11 +200,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="secondMobile" class="col-md-4 col-form-label text-md-right">@lang('layout.secondMobile')</label>
+                            <label for="second_mobile" class="col-md-4 col-form-label text-md-right">@lang('layout.secondMobile')</label>
 
                             <div class="col-md-6">
-                                <input id="secondMobile" type="tel" class="form-control @error('secondMobile') is-invalid @enderror" name="secondMobile" value="{{ old('secondMobile') }}" required autocomplete="secondMobile" autofocus>
-                                @error('secondMobile')
+                                <input id="second_mobile" type="tel" class="form-control @error('second_mobile') is-invalid @enderror" name="second_mobile" value="{{ old('second_mobile') }}" required autocomplete="second_mobile" autofocus>
+                                @error('second_mobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -207,12 +213,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tel" class="col-md-4 col-form-label text-md-right">@lang('layout.telephone')</label>
+                            <label for="telephone" class="col-md-4 col-form-label text-md-right">@lang('layout.telephone')</label>
 
                             <div class="col-md-6">
-                                <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus>
+                                <input id="telephone" type="tel" class="form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone" autofocus>
 
-                                @error('tel')
+                                @error('telephone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -274,7 +280,7 @@
                                 @enderror
                             </div>
                         </div>
-                   
+
 
                         <div class="custom-file ">
                             <label for="avatar" class="text-left custom-file-label col-md-10 offset-md-1" data-browse="@lang('layout.choose_file')" >@lang('layout.avatar')</label>
@@ -298,6 +304,7 @@
                             </div>
                         </div>
                     </form>
+                    @endguest
                 </div>
             </div>
         </div>

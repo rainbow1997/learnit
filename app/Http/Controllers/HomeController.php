@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function redirectTo()
+    {
+        return app()->getLocale() . '/home';
+    }
+
 }

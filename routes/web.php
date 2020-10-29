@@ -35,6 +35,7 @@ Route::prefix('{locale}')->group(function(){
     return view('welcome');
   });
   Auth::routes();
+  Route::get('/logout','Auth\LoginController@logout');
   Route::get('/home','HomeController@index');
   Route::post('ajaxShowUserTypeRegForm/','Auth\RegisterController@ajaxShowUserTypeRegForm');
   Route::get('/testEmail',function()
