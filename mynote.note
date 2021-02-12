@@ -1,0 +1,67 @@
+How to call children relationship class example:
+class Drawing extends Eloquent {
+    public function user() {
+        return $this->belongsTo('User', 'user_id');
+    }
+
+    // this throws the relation error above, also I beleive this does two queries, anyway to improve this?
+    public function userLink() {
+        return $this->user->link;
+    }
+}
+
+class User extends Eloquent {
+    public function link() {
+        return $this->morphTo('User', 'type', 'id');
+    }
+}
+
+class Retailer extends Eloquent {
+    public function user() {
+        return $this->belongsTo('User', 'id');
+    }
+}
+
+class Manufacturer extends Eloquent {
+    public function user() {
+        return $this->belongsTo('User', 'id');
+    }
+}
+3
+
+Try this instead:
+
+Drawing::first()->user->link;
+or this:
+
+// Drawing model
+public function user()
+{
+    return $this->belongsTo('User', 'user_id');
+}
+
+// Drawing model
+// Requires above relation
+public function userLink()
+{
+    return $this->user->link;
+}
+Then:
+
+$ulink = Drawing::first()->userLink();
+Or newer::
+Update: Just make changes to your method like this (Create an accessor):
+
+public function getUserLinkAttribute()
+{
+    return $this->user->link;
+}
+/////////////////////////////////////////////////////////
+foreign key behich vajh nmitune null bashe
+
+////////
+hale moshkel seed nashodan berkhatere cache
+ composer dump-autoload
+ ///////////////////////
+ $lesson->qbanks[0]->questions[0]->questionable
+dastresi sade o bi dardesar baraye relation haye morphi besoorate mostaghim

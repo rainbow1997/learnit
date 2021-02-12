@@ -71,6 +71,10 @@ class User extends Authenticatable
     {
         return $this->morphTo();
     }
+    public function wallet()
+    {
+        return $this->hasOne(User::class,'id');
+    }
 
 
 
@@ -87,7 +91,9 @@ class User extends Authenticatable
     {
 
         $user=new User($regData,$userObj);
+//        $userWallet=new Wallet($user);
         $copy=clone $user;
+//        $userWallet->save();
         $user->save();
         return true;
         // $/user->create($userObj);
