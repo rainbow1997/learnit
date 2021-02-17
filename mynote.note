@@ -65,3 +65,5 @@ hale moshkel seed nashodan berkhatere cache
  ///////////////////////
  $lesson->qbanks[0]->questions[0]->questionable
 dastresi sade o bi dardesar baraye relation haye morphi besoorate mostaghim
+//////
+https://stackoverflow.com/questions/49205427/laravel-polymorphic-database-seeder-factory

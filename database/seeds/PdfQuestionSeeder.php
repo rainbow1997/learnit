@@ -1,8 +1,12 @@
 <?php
 
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class PdfQuestionSeeder extends Seeder
 {
@@ -15,8 +19,8 @@ class PdfQuestionSeeder extends Seeder
     {
         //
         DB::table('pdf_question')->insert([
-            'question_id' => rand(1, 12),
-            'attachment_id' => rand(1, 12),
+            'question_id' => rand(0, 12),
+            'attachment_id' => rand(0, 12),
 
         ]);
     }

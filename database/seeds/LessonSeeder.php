@@ -17,7 +17,7 @@ class LessonSeeder extends Seeder
     {
         //
         DB::table('lessons')->insert([
-            'term_id'=>rand(1,4),
+            'term_id'=>rand(1,7),
             'name' => Str::random(10),
             'registration_capacity'=>rand(0,100),
             'units'=>rand(1,5),

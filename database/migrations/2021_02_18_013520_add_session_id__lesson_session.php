@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NewEditForPdfSession extends Migration
+class AddSessionIdLessonSession extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class NewEditForPdfSession extends Migration
      */
     public function up()
     {
-
-        Schema::table('pdf_less_sess_attachment', function (Blueprint $table) {
-            //less_sess_attachment_id
-           // $table->renameColumn('less_sess_attachment_id','session_attachment_id');
-
+        Schema::table('lesson_session', function (Blueprint $table) {
+            //
+            $table->foreignId('session_id')->constrained('sessions')->onDelete('cascade');
 
         });
     }
@@ -29,8 +27,10 @@ class NewEditForPdfSession extends Migration
      */
     public function down()
     {
-        Schema::table('pdf_less_sess_attachment', function (Blueprint $table) {
+        Schema::table('lesson_session', function (Blueprint $table) {
             //
+            $table->dropForeign(['session_id']);
+            $table->dropColumn('session_id');
         });
     }
 }

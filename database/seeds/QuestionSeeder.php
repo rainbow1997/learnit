@@ -20,9 +20,9 @@ class QuestionSeeder extends Seeder
         //
         //
         DB::table('questions')->insert([
-            'qbank_id'=>rand(1,5),
+            'qbank_id'=>rand(0,3),
            // 'describe' => Str::random(30),
-            'questionable_type' => 'App\QBank\PdfQuestion',
+            'questionable_type' => 'App\QBank\ImageQuestion',
             'questionable_id' => rand(0,9),
 
 

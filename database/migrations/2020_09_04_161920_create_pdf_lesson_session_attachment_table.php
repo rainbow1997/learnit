@@ -15,7 +15,7 @@ class CreatePdfLessonSessionAttachmentTable extends Migration
     {
         Schema::create('pdf_less_sess_attachment', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('less_sess_attachment_id')->constrained('less_sess_attachment')->onDelete('cascade');
+           // $table->foreignId('less_sess_attachment_id')->constrained('less_sess_attachment')->onDelete('cascade');
             $table->timestamps();
             $table->integer('pages_count');
         });

@@ -17,8 +17,8 @@ class ImageQuestionSeeder extends Seeder
     {
         //
         DB::table('image_question')->insert([
-            'question_id' => rand(1, 12),
-            'attachment_id' => rand(1, 12),
+            'question_id' => rand(1, 3),
+            'attachment_id' => rand(0, 4),
 
         ]);
     }

@@ -18,7 +18,7 @@ class NewEditForArchiveSession extends Migration
 
         Schema::table('archive_less_sess_attachment', function (Blueprint $table) {
             //
-            $table->renameColumn('less_sess_attachment_id','session_attachment_id');
+          //  $table->renameColumn('less_sess_attachment_id','session_attachment_id');
             $table->mediumText('format');
 
         });

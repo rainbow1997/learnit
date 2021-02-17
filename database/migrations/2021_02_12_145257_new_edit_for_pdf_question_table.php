@@ -13,11 +13,15 @@ class NewEditForPdfQuestionTable extends Migration
      */
     public function up()
     {
+
+            if(Schema::hasTable('attachment'))
+                Schema::rename('attachment', 'attachments');
         Schema::table('pdf_question', function (Blueprint $table) {
             //
             $table->dropForeign(['question_attachment_id']); //inkar nmikonehao
             $table->dropColumn('question_attachment_id');
-            $table->foreignId('attachment_id')->constrained('attachment')->onDelete('cascade')->nullable();
+            if(!Schema::hasColumn('attachments','attachment_id'))
+                $table->foreignId('attachment_id')->constrained('attachments')->onDelete('cascade')->nullable();
         });
     }
 

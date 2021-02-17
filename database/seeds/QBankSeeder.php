@@ -19,7 +19,7 @@ class QBankSeeder extends Seeder
     {
         //
         DB::table('qbanks')->insert([
-            'lesson_id'=>rand(3,7),
+            'lesson_id'=>rand(0,3),
             'describe' => Str::random(30),
 
 

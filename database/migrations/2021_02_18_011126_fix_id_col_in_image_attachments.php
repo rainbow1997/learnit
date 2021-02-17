@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArchiveLessonSessionAttachmentTable extends Migration
+class FixIdColInImageAttachments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateArchiveLessonSessionAttachmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('archive_less_sess_attachment', function (Blueprint $table) {
+        Schema::table('image_attachment', function (Blueprint $table) {
+            //
             $table->id();
-           // $table->foreignId('less_sess_attachment_id')->constrained('less_sess_attachment')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -27,6 +26,8 @@ class CreateArchiveLessonSessionAttachmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('archive_less_sess_attachment');
+        Schema::table('image_attachment', function (Blueprint $table) {
+            //
+        });
     }
 }

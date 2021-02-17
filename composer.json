@@ -16,7 +16,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "morilog/jalali": "^3.1",
+        "morilog/jalali": "^3.0",
         "stevebauman/location": "^5.1"
     },
     "require-dev": {

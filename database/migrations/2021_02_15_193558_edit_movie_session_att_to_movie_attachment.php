@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NewEditForPdfSession extends Migration
+class EditMovieSessionAttToMovieAttachment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class NewEditForPdfSession extends Migration
      */
     public function up()
     {
-
-        Schema::table('pdf_less_sess_attachment', function (Blueprint $table) {
-            //less_sess_attachment_id
-           // $table->renameColumn('less_sess_attachment_id','session_attachment_id');
-
+        Schema::table('movie_session_att', function (Blueprint $table) {
+            //
+            $table->foreignId('attachment_id')->constrained('attachments')->onDelete('cascade')->nullable();
 
         });
     }
@@ -29,7 +27,7 @@ class NewEditForPdfSession extends Migration
      */
     public function down()
     {
-        Schema::table('pdf_less_sess_attachment', function (Blueprint $table) {
+        Schema::table('movie_session_att', function (Blueprint $table) {
             //
         });
     }

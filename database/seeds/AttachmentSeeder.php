@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Attachment\Attachment as Attachment;
 class AttachmentSeeder extends Seeder
 {
     /**
@@ -14,11 +15,17 @@ class AttachmentSeeder extends Seeder
      */
     public function run()
     {
+//      Attachment::factory()->create();
+////        $this->call([
+//                AttachmentSeeder::class
+//        ]);
+        //'App\Attachment\Attachment'::factory()->count(10)->
         //
-        DB::table('attachment')->insert([
+        DB::table('attachments')->insert([
             'describe' => Str::random(30),
             'size'=>rand(1000,30000),
-            //'' => 'App\QBank\TextQuestion',
+            'attachmentable_type' => 'App\Attachment\ArchiveAttachment',
+            'attachmentable_id'=>rand(0,10)
 
         ]);
     }

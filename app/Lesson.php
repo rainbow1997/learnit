@@ -14,7 +14,7 @@ public function term()
 }
 public function sessions()
 {
-    return $this->hasMany('\App\Session');
+    return $this->hasMany('\App\Session\Session');
 }
 public function qbanks()
 {

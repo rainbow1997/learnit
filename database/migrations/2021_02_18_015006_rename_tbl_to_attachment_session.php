@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NewEditForPdfSession extends Migration
+class RenameTblToAttachmentSession extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class NewEditForPdfSession extends Migration
      */
     public function up()
     {
-
-        Schema::table('pdf_less_sess_attachment', function (Blueprint $table) {
-            //less_sess_attachment_id
-           // $table->renameColumn('less_sess_attachment_id','session_attachment_id');
-
-
+        Schema::table('session_attachment', function (Blueprint $table) {
+            //
+            Schema::rename('session_attachment','attachment_session');
         });
     }
 
@@ -29,8 +26,11 @@ class NewEditForPdfSession extends Migration
      */
     public function down()
     {
-        Schema::table('pdf_less_sess_attachment', function (Blueprint $table) {
+        Schema::rename('attachment_session','session_attachment');
+
+        Schema::table('session_attachment', function (Blueprint $table) {
             //
+
         });
     }
 }
