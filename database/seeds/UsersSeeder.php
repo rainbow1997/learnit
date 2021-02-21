@@ -1,6 +1,10 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class UsersSeeder extends Seeder
 {
@@ -16,7 +20,7 @@ class UsersSeeder extends Seeder
             [
                 'fname'=>Str::random(10),
                 'lname'=>Str::random(10),
-                'password'=>Hash::make(Str::random(20)),
+                'password'=>\Hash::make(Str::random(20)),
 
                 'email'=>Str::random(10).'@gmail.com',
                 'nationalcode'=>rand(1111,999),
@@ -27,12 +31,13 @@ class UsersSeeder extends Seeder
                 'education_place'=>Str::random(20),
                 'study_field'=>Str::random(20),
                 'study_orention'=>Str::random(20),
-                'webpage'=>Str::random(20)
+                'webpage'=>Str::random(20),
+                'userable_id'=>1,
+                'userable_type'=>'App\Users\Learner'
 
 
 
-                
         ]);
-        
+
     }
 }

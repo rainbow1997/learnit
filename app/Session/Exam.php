@@ -5,6 +5,7 @@ namespace App\Session;
 
 class Exam extends Session
 {
+    protected $table='exams';
     protected $fillable=['total_score','approval_score','status'];
     public function examable()
     {

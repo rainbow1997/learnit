@@ -29,6 +29,10 @@ class Learner extends User
     {
         return $this->morphTo();
     }
+    public function sessionPassStatus()
+    {
+        return $this->hasMany('App\Session\SessionPassStatus');
+    }
 //    public static function create($data)
 //    {
 //

@@ -67,3 +67,13 @@ hale moshkel seed nashodan berkhatere cache
 dastresi sade o bi dardesar baraye relation haye morphi besoorate mostaghim
 //////
 https://stackoverflow.com/questions/49205427/laravel-polymorphic-database-seeder-factory
+
+//////////
+dar mored relationship ha tafavot asasie halat adi ba polymorphism dar ine ke dar halat adi ma bayad dar jadavel kelid khareji ra ba ame moshakhas
+an jadval tarif konim masanaln dar jadvan comments ha dashte bashim post_id category_id
+ama ba polymorphism digar lozoomi be tarif sabet kelid hayekhareji ba namemoshakhas jadval nadarim
+yani bejaye post_id ya category_id minevisim commentable_type va commentable_id
+hal baraye commente marboot be post drim :
+commentable_type=post(namejadval) commentable_id=post_id(id record post dar jadvale khodesh)
+////////
+dar taeein hasOne belongsTo deghat kon ke class zirin hatman belongsTo bashe

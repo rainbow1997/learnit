@@ -26,5 +26,9 @@ class Session extends Model
     {
        return $this->attachments();
     }
+    public function sessionPassStatus()
+    {
+        return $this->hasMany('App\Session\SessionPassStatus');
+    }
 
 }
