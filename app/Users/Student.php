@@ -14,9 +14,19 @@ class Student extends Learner
     }
     public function __construct()
     {
-
         $this->setStudentalCodeAttribute();
     }
+    public function learner()
+    {
+        return $this->morphOne('App\Users\Learner');
+    }
+    public static function createByForm(User $userObj)
+    {
+     $instance=new self();
+     $instance->setStudentalCodeAttribute();
+     return $instance;
+    }
+
     public static function create(object $userObj,array $regData)
     {
         $userObj->save();
@@ -30,12 +40,6 @@ class Student extends Learner
 
     }
 
-
-    //moshkel extendaro hal kon
-    public function learner()
-    {
-        return $this->morphOne('App\Users\Learner','learnerable');
-    }
 
     public static function getLocalValidation()
     {

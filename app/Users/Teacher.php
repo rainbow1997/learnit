@@ -4,15 +4,11 @@ class Teacher extends Official
 {
     protected $table='teachers';
 
-    //public static $teacherFillable=null;
-  //  public static $teacherFillable=['personnelCode'=>null
-  //  ];
-//    public static function create($data)
-//    {
-//        parent::create($data);
-//        die('injast');
-//
-//    }
+    public function __construct()
+    {
+
+        $this->setPersonnelCodeAttribute();
+    }
     public function setPersonnelCodeAttributes()
     {
         $this->attributes['personnel_code']=$this->setPersonnelCode();
@@ -21,10 +17,12 @@ class Teacher extends Official
     {
         return $this->attributes['personnel_code'];
     }
-    public function __construct()
-    {
 
-    $this->setPersonnelCodeAttribute();
+    public static function createByForm(User $userObj)
+    {
+        $instance=new self();
+        $instance->setPersonnelCodeAttribute();
+        return $instance;
     }
     public static function create(object $userObj,array $regData)
     {

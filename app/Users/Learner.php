@@ -4,13 +4,26 @@ use Illuminate\Database\Eloquent\Model as Model;
 
 class Learner extends User
 {
+    protected $table='learners';
 
-    public function __construct(object $userObj)
+    public function __construct()
     {
-        $this->setLearnerableIdAttribute($userObj->id);
-        $this->setLearnerableTypeAttribute(get_class($userObj));
 
     }
+    public static function createByForm(User $userObj)
+    {
+        $instance=new self();
+        $instance->setLearnerableIdAttribute($userObj->id);
+        $instance->setLearnerableTypeAttribute(get_class($userObj));
+        return $instance;
+    }
+    //for method overriding
+//    public function __construct(object $userObj)
+//    {
+//        $this->setLearnerableIdAttribute($userObj->id);
+//        $this->setLearnerableTypeAttribute(get_class($userObj));
+//
+//    }
     public function setLearnerableIdAttribute($id)
     {
         $this->attributes['learnerable_id']=$id;
@@ -19,7 +32,6 @@ class Learner extends User
     {
         $this->attributes['learnerable_type']=$type;
     }
-    protected $table='learners';
     //protected $fillable = [];
     public function user() //user be official
     {
@@ -33,22 +45,13 @@ class Learner extends User
     {
         return $this->hasMany('App\Session\SessionPassStatus');
     }
-//    public static function create($data)
-//    {
-//
-//        parent::create($data);
-//
-//    }
+
     public static function create(object $userObj,array $regData)//$attributes hamoon sheyei az Teacher
     {
-        $learner=new Learner($userObj);
+        //$learner=new Learner($userObj); // method overriding
+        $learner=Learner::createByForm($userObj);
         $learner->save();
         parent::create($learner,$regData);
 
-//        $attributes['userable_id']=$official->id;
-//        $attributes['userable_type']=$official->type;
-//        dd($attributes);
-//        $user->create($attributes);
-//        dd('sdfg');
     }
 }

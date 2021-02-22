@@ -10,7 +10,7 @@
         var selected=$("#person_type").val();
           $.ajax({
                 type:'POST',
-                url:'ajaxShowUserTypeRegForm/',
+                url:'ajaxShowUserTypeRegForm',
                 data:{_token: "{{ csrf_token() }}",selectVal:selected
                 },
                 success: function( response ) {

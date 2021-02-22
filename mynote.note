@@ -77,3 +77,14 @@ hal baraye commente marboot be post drim :
 commentable_type=post(namejadval) commentable_id=post_id(id record post dar jadvale khodesh)
 ////////
 dar taeein hasOne belongsTo deghat kon ke class zirin hatman belongsTo bashe
+////////////////////
+learn method overriding specially in constructor overriding in php
+zemnan yadet nare ravabet ham mostaghim ham makoos ta akharin classe zirin anjam bedi
+ $student=new App\Users\Student
+$student->id=1
+ $learner=new App\Users\Learner;
+$learner->id=1
+ $learner->learnerable()->associate($student);
+ $user=new App\Users\User
+ $user->userable()->associate($learner);
+ $user->save();
