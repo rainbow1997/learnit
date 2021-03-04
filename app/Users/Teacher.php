@@ -43,7 +43,10 @@ class Teacher extends Official
     {
         return $this->morphOne('App\Users\Official','officialable');
     }
-
+    public function teacher()
+    {
+        return $this->official->user();
+    }
     public static function getLocalValidation()
     {
     //this function passed to Register Controller

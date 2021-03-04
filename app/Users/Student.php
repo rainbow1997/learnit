@@ -18,7 +18,12 @@ class Student extends Learner
     }
     public function learner()
     {
-        return $this->morphOne('App\Users\Learner');
+        return $this->morphOne(Learner::class,'learnerable');
+    }
+    public function user()
+    {
+       //return $this->hasManyThrough(User::class,Learner::class,null,'learnerable_id')->where('learnerable_type',User::class);
+        return $this->learner->user();//ye rahe sadetar baraye hasManyThrough in Polymorphic ha
     }
     public static function createByForm(User $userObj)
     {

@@ -88,3 +88,17 @@ $learner->id=1
  $user=new App\Users\User
  $user->userable()->associate($learner);
  $user->save();
+////////////////
+roles and permission
+https://www.itsolutionstuff.com/post/laravel-8-user-roles-and-permissions-tutorialexample.html
+///////////////////
+  public function learner()
+    {
+        return $this->morphOne(Learner::class,'learnerable');
+    }
+    public function user()
+    {
+       //return $this->hasManyThrough(User::class,Learner::class,null,'learnerable_id')->where('learnerable_type',User::class);
+        return $this->learner->user();//ye rahe sadetar baraye hasManyThrough in Polymorphic ha
+    }
+    //////////////////////

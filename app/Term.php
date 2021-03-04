@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 
 class Term extends Model
 {
+
 protected $fillable=['term_start_date','term_end_date','status'];
 
 public function toggleStatus()

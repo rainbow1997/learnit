@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth as Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,HasRoles;
 
     //It's important that all files for view or etc should follow its owner lower  name
     //ex:register.blade.php Is Original then we have register.student.blade.php
@@ -98,5 +99,8 @@ class User extends Authenticatable
         return true;
         // $/user->create($userObj);
     }
-
+//    public function roles()
+//    {
+//        return $this->belongsToMany('App\Users\Role','role_user')->wherePivot('status',1);;
+//    }
 }
