@@ -102,3 +102,39 @@ https://www.itsolutionstuff.com/post/laravel-8-user-roles-and-permissions-tutori
         return $this->learner->user();//ye rahe sadetar baraye hasManyThrough in Polymorphic ha
     }
     //////////////////////
+    be in sabk relation ha deghat kon
+    $teacher->lessons[0]->sessions[1]->exam->qbank->questions[0]->questionable->output
+    age shey az  class asli yani farzando bekhay az classnameable() estefade mikoni
+    classname::where(condition,value)
+    baraye gereftan besoorat collection va dadan be query ha be soorat jami az maghadir field ha
+    az pluck('fieldname1',...) estefade kon ke class ei az collection havi kolle maghadire field1 e
+    vaghti esm class masalan Sessione dg baghie tavabe age ba in esm shoroo shan
+    tabe ghavaed khasian pas moragheb bash
+    (age mikhay mostaghim class begiri () yadet nare)3
+
+    etimes you may want to count the number of related models for a given relationship without actually loading the models. To accomplish this, you may use the withCount method. The withCount method which will place a {relation}_count attribute on the resulting models:
+
+    use App\Models\Post;
+
+    $posts = Post::withCount('comments')->get();
+
+    foreach ($posts as $post) {
+        echo $post->comments_count;
+    }
+    ///////////////////////////////////
+    baraye marboot kardn relation ha
+    Belongs To Relationships
+    If you would like to assign a child model to a new parent model, you may use the associate method. In this example, the User model defines a belongsTo relationship to the Account model. This associate method will set the foreign key on the child model:
+
+    use App\Models\Account;
+
+    $account = Account::find(10);
+
+    $user->account()->associate($account);
+
+    $user->save();
+    To remove a parent model from a child model, you may use the dissociate method. This method will set the relationship's foreign key to null:
+
+    $user->account()->dissociate();
+
+    $user->save();

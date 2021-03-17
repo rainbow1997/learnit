@@ -1,5 +1,6 @@
 <?php
 namespace App\Users;
+use App\QBank\LearnerAnswer;
 use Illuminate\Database\Eloquent\Model as Model;
 
 class Learner extends User
@@ -45,6 +46,7 @@ class Learner extends User
     {
         return $this->hasMany('App\Session\SessionPassStatus');
     }
+
 
     public static function create(object $userObj,array $regData)//$attributes hamoon sheyei az Teacher
     {

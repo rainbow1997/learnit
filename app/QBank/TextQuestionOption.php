@@ -19,7 +19,7 @@ class TextQuestionOption extends QuestionOption
     }
     public function output()
     {
-        return $this->text;
+        return $this->option_text;
     }
 
 }

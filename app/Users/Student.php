@@ -25,6 +25,11 @@ class Student extends Learner
        //return $this->hasManyThrough(User::class,Learner::class,null,'learnerable_id')->where('learnerable_type',User::class);
         return $this->learner->user();//ye rahe sadetar baraye hasManyThrough in Polymorphic ha
     }
+//    public function
+//    public function myLessons()
+//    {
+//        return $this->hasMany();
+//    }
     public static function createByForm(User $userObj)
     {
      $instance=new self();

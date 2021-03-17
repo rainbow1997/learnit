@@ -10,7 +10,6 @@ class Question extends Model
     protected $table="questions";
     public function output()
     {
-        ;
     }
     public function qbank()
     {
@@ -18,7 +17,7 @@ class Question extends Model
     }
     public function questionable()
     {
-        return $this->morphTo(__FUNCTION__,'questionable_type','questionable_id');
+        return $this->morphTo();
     }
     public function questionoptions()
     {

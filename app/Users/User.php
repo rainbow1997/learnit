@@ -2,6 +2,8 @@
 
 namespace App\Users;
 
+use App\Lesson;
+use App\Term;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -98,6 +100,22 @@ class User extends Authenticatable
         $user->save();
         return true;
         // $/user->create($userObj);
+    }
+    public function userAnswers()
+    {
+        return $this->hasMany('App\QBank\LearnerAnswer');
+    }
+    public function terms()
+    {
+        return $this->belongsToMany(Term::class,'users_terms_tbl');
+    }
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class,'users_lessons_tbl');
+    }
+    public function lessonsOfTerm($term_id)
+    {
+        return $this->lessons()->where('term_id',$term_id)->get();
     }
 //    public function roles()
 //    {
