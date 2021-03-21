@@ -48,15 +48,7 @@ class User extends Authenticatable
     ];
 
     //Learnit functions
-    public function __construct(array $regData=[],object $userObj=null)
-    {
-        if($userObj!=NULL) {
-            $this->setUserableIdAttribute($userObj->id);
-            $this->setUserableTypeAttribute(get_class($userObj));
-        }
-        parent::__construct($regData);
 
-    }
 
 
     public static function getAllTypes()
@@ -89,16 +81,21 @@ class User extends Authenticatable
     {
         $this->attributes['userable_type']=$type;
     }
+    public function createFromForm()
+    {
+//        $userInstance=new User;
+//        $userInstance->
+    }
 
     public static function create(object $userObj,array $regData)//chon teacher null mire behesh az register Controller
     {
+        $collection=collect($regData);
+        $collection=$collection->all();
+        $user=new User($collection);
 
-        $user=new User($regData,$userObj);
-//        $userWallet=new Wallet($user);
-        $copy=clone $user;
-//        $userWallet->save();
+        $user->userable()->associate($userObj);
         $user->save();
-        return true;
+        return $user;
         // $/user->create($userObj);
     }
     public function userAnswers()

@@ -3,7 +3,7 @@ namespace App\Users;
 use App\QBank\LearnerAnswer;
 use Illuminate\Database\Eloquent\Model as Model;
 
-class Learner extends User
+class Learner extends Model
 {
     protected $table='learners';
 
@@ -11,7 +11,7 @@ class Learner extends User
     {
 
     }
-    public static function createByForm(User $userObj)
+    public static function createByForm(Student $userObj)
     {
         $instance=new self();
         $instance->setLearnerableIdAttribute($userObj->id);
@@ -53,7 +53,8 @@ class Learner extends User
         //$learner=new Learner($userObj); // method overriding
         $learner=Learner::createByForm($userObj);
         $learner->save();
-        parent::create($learner,$regData);
+        $userObj->learner()->save($learner);
+        return User::create($learner,$regData);
 
     }
 }

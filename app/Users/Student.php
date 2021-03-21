@@ -1,6 +1,8 @@
 <?php
 namespace App\Users;
-class Student extends Learner
+use Illuminate\Database\Eloquent\Model as Model;
+
+class Student extends Model
 {
     protected $table='students';
 
@@ -14,7 +16,7 @@ class Student extends Learner
     }
     public function __construct()
     {
-        $this->setStudentalCodeAttribute();
+         $this->setStudentalCodeAttribute();
     }
     public function learner()
     {
@@ -30,18 +32,17 @@ class Student extends Learner
 //    {
 //        return $this->hasMany();
 //    }
-    public static function createByForm(User $userObj)
-    {
-     $instance=new self();
-     $instance->setStudentalCodeAttribute();
-     return $instance;
-    }
+//    public static function createByForm(Student $userObj)
+//    {
+//     $instance=new self();
+//     $instance->setStudentalCodeAttribute();
+//     return $instance;
+//    }
 
     public static function create(object $userObj,array $regData)
     {
         $userObj->save();
-        parent::create($userObj,$regData);
-
+        return Learner::create($userObj,$regData);
     }
     //accessor get mutrator set
     public function setStudentalCodeAttribute()

@@ -2,7 +2,7 @@
 namespace App\Users;
 use Illuminate\Database\Eloquent\Model as Model;
 
-class Official extends User
+class Official extends Model
 {
     protected $table='officials';
 
@@ -48,6 +48,8 @@ class Official extends User
     {
         $official=Official::createByForm($userObj);
         $official->save();
+        $official->official()->save($official);
+
         parent::create($official,$regData);
 
 //        $attributes['userable_id']=$official->id;

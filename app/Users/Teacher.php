@@ -1,6 +1,8 @@
 <?php
 namespace App\Users;
-class Teacher extends Official
+use Illuminate\Database\Eloquent\Model as Model;
+
+class Teacher extends Model
 {
     protected $table='teachers';
 
@@ -18,16 +20,16 @@ class Teacher extends Official
         return $this->attributes['personnel_code'];
     }
 
-    public static function createByForm(User $userObj)
-    {
-        $instance=new self();
-        $instance->setPersonnelCodeAttribute();
-        return $instance;
-    }
+//    public static function createByForm(User $userObj)
+//    {
+//        $instance=new self();
+//        $instance->setPersonnelCodeAttribute();
+//        return $instance;
+//    }
     public static function create(object $userObj,array $regData)
     {
     $userObj->save();
-    parent::create($userObj,$regData);
+        return Official::create($userObj,$regData);
 
     }
     //accessor get mutrator set

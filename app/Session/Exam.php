@@ -33,7 +33,7 @@ class Exam extends Session
     {
         $passed=$this->hasPassBeforeConfirm($this->calculateExamScore());
         $this->sessionPassStatus=SessionPassStatus::createForConfirm(Auth::user(),$this->session,$this,$passed);
-        $this->sessionPassStatus->save();
+        return $this->sessionPassStatus->save();
     }
     protected function hasPassBeforeConfirm($sum) //when user confirm his exam answers
     {

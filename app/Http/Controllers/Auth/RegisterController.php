@@ -140,13 +140,7 @@ class RegisterController extends Controller
             //sendWelcomeNotification($user);
 
 
-        $user=$userClass::createByForm(new $userClass,$regData);
-        $user::create($user,$regData);
-            //$user->create(new $userClass,$regData);
-        //for method overriding
-        //$user=new $userClass;
-        //$user->create(new $userClass,$regData);
-
+        $user=$userClass::create(new $userClass,$regData);
         return $user;
 
     }
