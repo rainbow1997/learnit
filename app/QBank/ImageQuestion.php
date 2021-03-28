@@ -5,7 +5,7 @@ namespace App\QBank;
 use Illuminate\Database\Eloquent\Model as Model;
 
 
-class ImageQuestion extends Question
+class ImageQuestion extends Model
 {
     protected $table='image_question';
 

@@ -1,10 +1,9 @@
 <?php
-
-
 namespace App\QBank;
+use Illuminate\Database\Eloquent\Model as Model;
 
 
-class PdfQuestion extends Question
+class PdfQuestion extends Model
 {
     protected $table='pdf_question';
     public function question()

@@ -3,8 +3,9 @@
 
 namespace App\QBank;
 
+use Illuminate\Database\Eloquent\Model as Model;
 
-class TextQuestionOption extends QuestionOption
+class TextQuestionOption extends Model
 {
     protected $table='text_ques_opt';
 

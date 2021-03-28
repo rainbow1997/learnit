@@ -7,7 +7,7 @@ namespace App\Session;
 use App\QBank\QBank;
 use App\QBank\Question;
 
-class SimpleExam extends Exam
+class SimpleExam extends Model
 {
     protected $table='simple_exams';
 //    public function

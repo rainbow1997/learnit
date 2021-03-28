@@ -5,7 +5,7 @@ namespace App\QBank;
 use Illuminate\Database\Eloquent\Model as Model;
 
 
-class PdfQuestionOption extends QuestionOption
+class PdfQuestionOption extends Model
 {
     protected $table='pdf_ques_opt';
 

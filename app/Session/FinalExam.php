@@ -3,8 +3,9 @@
 
 namespace App\Session;
 
+use Illuminate\Database\Eloquent\Model as Model;
 
-class FinalExam extends Exam
+class FinalExam extends Model
 {
     protected $table='final_ex';
     public function exam()

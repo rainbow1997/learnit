@@ -8,7 +8,9 @@ use App\QBank\Question;
 use App\Users\Learner;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-class Exam extends Session
+use Illuminate\Database\Eloquent\Model as Model;
+
+class Exam extends Model
 {
     protected $table = 'exams';
     protected $fillable = ['total_score', 'approval_score', 'status'];
@@ -66,11 +68,7 @@ class Exam extends Session
     {
         return $this->belongsTo('App\QBank\QBank','qbank_id');
     }
-    public function passed()
-    {
-        dd('inja');
-        return $this->hasOne(SessionPassStatus::class);
-    }
+
     public function isPassed()
     {
         return $this->sessionPassStatus=$this->belongsTo(SessionPassStatus::class);
