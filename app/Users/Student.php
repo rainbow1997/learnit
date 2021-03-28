@@ -1,8 +1,8 @@
 <?php
 namespace App\Users;
 use Illuminate\Database\Eloquent\Model as Model;
-
-class Student extends Model
+use App\Users\LearnerUser;
+class Student extends Model implements LearnerUser
 {
     protected $table='students';
 
@@ -27,19 +27,8 @@ class Student extends Model
        //return $this->hasManyThrough(User::class,Learner::class,null,'learnerable_id')->where('learnerable_type',User::class);
         return $this->learner->user();//ye rahe sadetar baraye hasManyThrough in Polymorphic ha
     }
-//    public function
-//    public function myLessons()
-//    {
-//        return $this->hasMany();
-//    }
-//    public static function createByForm(Student $userObj)
-//    {
-//     $instance=new self();
-//     $instance->setStudentalCodeAttribute();
-//     return $instance;
-//    }
 
-    public static function create(object $userObj,array $regData)
+    public static function create(LearnerUser $userObj,array $regData)
     {
         $userObj->save();
         return Learner::create($userObj,$regData);

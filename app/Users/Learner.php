@@ -2,6 +2,7 @@
 namespace App\Users;
 use App\QBank\LearnerAnswer;
 use Illuminate\Database\Eloquent\Model as Model;
+use App\Users\LearnerUser;
 
 class Learner extends Model
 {
@@ -11,20 +12,13 @@ class Learner extends Model
     {
 
     }
-    public static function createByForm(Student $userObj)
+    public static function createByForm(LearnerUser $userObj)
     {
         $instance=new self();
         $instance->setLearnerableIdAttribute($userObj->id);
         $instance->setLearnerableTypeAttribute(get_class($userObj));
         return $instance;
     }
-    //for method overriding
-//    public function __construct(object $userObj)
-//    {
-//        $this->setLearnerableIdAttribute($userObj->id);
-//        $this->setLearnerableTypeAttribute(get_class($userObj));
-//
-//    }
     public function setLearnerableIdAttribute($id)
     {
         $this->attributes['learnerable_id']=$id;
@@ -48,9 +42,8 @@ class Learner extends Model
     }
 
 
-    public static function create(object $userObj,array $regData)//$attributes hamoon sheyei az Teacher
+    public static function create(LearnerUser $userObj,array $regData)//$attributes hamoon sheyei az Teacher
     {
-        //$learner=new Learner($userObj); // method overriding
         $learner=Learner::createByForm($userObj);
         $learner->save();
         $userObj->learner()->save($learner);

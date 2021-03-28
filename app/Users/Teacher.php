@@ -1,8 +1,8 @@
 <?php
 namespace App\Users;
 use Illuminate\Database\Eloquent\Model as Model;
-
-class Teacher extends Model
+use App\Users\OfficialUser;
+class Teacher extends Model implements OfficialUser
 {
     protected $table='teachers';
 
@@ -20,13 +20,7 @@ class Teacher extends Model
         return $this->attributes['personnel_code'];
     }
 
-//    public static function createByForm(User $userObj)
-//    {
-//        $instance=new self();
-//        $instance->setPersonnelCodeAttribute();
-//        return $instance;
-//    }
-    public static function create(object $userObj,array $regData)
+    public static function create(OfficialUser $userObj,array $regData)
     {
     $userObj->save();
         return Official::create($userObj,$regData);
@@ -45,7 +39,7 @@ class Teacher extends Model
     {
         return $this->morphOne('App\Users\Official','officialable');
     }
-    public function teacher()
+    public function user()
     {
         return $this->official->user();
     }

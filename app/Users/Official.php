@@ -1,17 +1,13 @@
 <?php
 namespace App\Users;
+use App\Users\OfficialUser;
 use Illuminate\Database\Eloquent\Model as Model;
-
 class Official extends Model
 {
     protected $table='officials';
 
-    //public function setPersonnelCode();
-    //public function getPersonnelCode();
-    public function __construct()
-    {
-    }
-    public static function createByForm(User $userObj)
+
+    public static function createByForm(OfficialUser $userObj) // badan ba interface eslah she
     {
         $instance=new self();
         $instance->setOfficialableIdAttribute($userObj->id);
@@ -38,24 +34,12 @@ class Official extends Model
     {
         return $this->morphTo();
     }
-//    public static function create($data)
-//    {
-//
-//        parent::create($data);
-//
-//    }
-    public static function create(object $userObj,array $regData)//$attributes hamoon sheyei az Teacher
+
+    public static function create(OfficialUser $userObj,array $regData)//$attributes hamoon sheyei az Teacher
     {
         $official=Official::createByForm($userObj);
         $official->save();
-        $official->official()->save($official);
-
-        parent::create($official,$regData);
-
-//        $attributes['userable_id']=$official->id;
-//        $attributes['userable_type']=$official->type;
-//        dd($attributes);
-//        $user->create($attributes);
-//        dd('sdfg');
+        $userObj->official()->save($official);
+        return User::create($official,$regData);
     }
 }
