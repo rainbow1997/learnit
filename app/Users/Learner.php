@@ -41,7 +41,6 @@ class Learner extends Model
         return $this->hasMany('App\Session\SessionPassStatus');
     }
 
-
     public static function create(LearnerUser $userObj,array $regData)//$attributes hamoon sheyei az Teacher
     {
         $learner=Learner::createByForm($userObj);

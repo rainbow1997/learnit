@@ -18,6 +18,10 @@ class Student extends Model implements LearnerUser
     {
          $this->setStudentalCodeAttribute();
     }
+    public function homeworks()
+    {
+        return $this->belongsToMany('App\Homework\Homework');
+    }
     public function learner()
     {
         return $this->morphOne(Learner::class,'learnerable');
