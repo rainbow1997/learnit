@@ -16,7 +16,8 @@ class NewEditAttachTable extends Migration
 
         Schema::table('less_sess_attachment', function (Blueprint $table) {
             //
-            $table->renameColumn('lesson_session_id','session_id');
+	 $table->dropForeign(['lesson_session_id']);     
+       $table->renameColumn('lesson_session_id','session_id');
 
         });
 

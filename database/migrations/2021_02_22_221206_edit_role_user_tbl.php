@@ -15,6 +15,10 @@ class EditRoleUserTbl extends Migration
     {
         Schema::table('role_users', function (Blueprint $table) {
             //
+		    $table->dropForeign(['users_id']);
+		    $table->dropForeign(['roles_id']);
+
+
             $table->renameColumn('users_id','user_id');
             $table->renameColumn('roles_id','role_id');
 
