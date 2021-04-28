@@ -138,3 +138,85 @@ https://www.itsolutionstuff.com/post/laravel-8-user-roles-and-permissions-tutori
     $user->account()->dissociate();
 
     $user->save();
+    when you can use associate() when your main class has belongsTo relationship
+
+
+Here's my notes on how to save and update on all the Eloquent relationships.
+
+in One to One:
+
+You have to use HasOne on the first model and BelongsTo on the second model
+
+to add record on the first model (HasOne) use the save function
+
+example:    $post->comments()->save($comment);
+
+to add record on the second model (BelongsTo) use the associate function
+
+example:    $user->account()->associate($account);    $user->save();
+
+in One to Many:
+
+You have to use HasMany on the first model and BelongsTo on the second model
+
+to add record on the first table (HasMany) use the save or saveMany functions
+
+example:    $post->comments()->saveMany($comments);
+
+to add record on the second model (BelongsTo) use the associate function
+
+example:    $user->account()->associate($account);    $user->save();
+
+in Many to Many:
+
+You have to use BelongsToMany on the first model and BelongsToMany on the second model
+
+to add records on the pivot table use attach or sync functions
+
+both functions accepts single ID or array of ID’s
+
+the difference is attach checks if the record already exist on the pivot table while sync don’t
+
+example: $user->roles()->attach($roleId);
+
+in Polymorphic One to Many:
+
+You have to use MorphMany on the main model and MorphTo on all the (***able) models
+
+to add records on all the other models use the save
+
+example:    $course->tags()->save($tag);
+
+the pivot table should have the following columns:
+
+. main model ID
+
+. (***able) ID
+
+. (***able) Type
+
+in Polymorphic Many to Many:
+
+You have to use MorphByMany on the main model and MorphToMany on all the (***able) models
+
+to add records on all the other models use the save or saveMany
+
+example:    $course->tags()->save($tag);
+
+example:    $course->tags()->saveMany([$tag_1, $tag_2, $tag_3]);
+
+the pivot table should have the following columns:
+
+. main model ID
+
+. (***able) ID
+
+. (***able) Type
+
+in Has Many Through (shortcut):
+
+You have to use HasManyThrough on the first table and have the normal relations on the other 2 tables
+
+this doesn’t work for ManyToMany relationships (where there’s a pivot table)
+
+however there’s a nice and easy solution just for that.

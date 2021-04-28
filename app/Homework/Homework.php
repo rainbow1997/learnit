@@ -14,12 +14,18 @@ class Homework extends Model
     {
         return $this->morphTo();
     }
-    public function users()
+    public function students()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(Student::class);
+        //every homework has 2 part question and answer !
+        //question is many to many but answer is 1 to 1
     }
     public function session()
     {
-        return $this->morphOne(Session::class,'sessionable');
+        return $this->belongsTo(Session::class);
+    }
+    public function homeworkAnswers()
+    {
+        return $this->hasMany(HomeworkAnswer::class);
     }
 }

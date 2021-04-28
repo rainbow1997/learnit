@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Carbon\Carbon;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +18,8 @@ class TermSeeder extends Seeder
         //
         DB::table('terms')->insert([
             'status'=>rand(0,1),
-           'term_start_date'=>date('c',time()),
-           'term_end_date'=>date('c',time()+10000),
+           'term_start_date'=>Carbon::now(),
+           'term_end_date'=>Carbon::now()->add(100,'day'),
            // 'describe' => Str::random(30),
 
 

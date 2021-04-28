@@ -38,5 +38,8 @@ class Session extends Model
     {
         return $this->hasOne('App\Session\Exam');
     }
-
+    public function homeworks()
+    {
+        return $this->hasMany('App\Homework\Homework');
+    }
 }

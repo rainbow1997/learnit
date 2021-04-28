@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersHomeworks extends Migration
+class EditUsersHomework extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateUsersHomeworks extends Migration
      */
     public function up()
     {
-        Schema::create('users_homeworks', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('homework_id')->constrained('homeworks');
+        Schema::rename('users_homeworks','students_homeworks');
+        Schema::table('students_homeworks', function (Blueprint $table) {
+            //
+
 
 
         });
@@ -30,6 +29,8 @@ class CreateUsersHomeworks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_homeworks');
+        Schema::table('students_homeworks', function (Blueprint $table) {
+            //
+        });
     }
 }
