@@ -220,3 +220,6 @@ You have to use HasManyThrough on the first table and have the normal relations 
 this doesn’t work for ManyToMany relationships (where there’s a pivot table)
 
 however there’s a nice and easy solution just for that.
+yeki az rahhaye kahesh khataye gpg too commit signings
+echo test | gpg --clearsign
+baraye privatekey hayer daraye password

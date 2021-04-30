@@ -20,7 +20,8 @@
         "laravelcollective/html": "^6.2",
         "morilog/jalali": "^3.0.7",
         "spatie/laravel-permission": "^4.0",
-        "stevebauman/location": "^5.1"
+        "stevebauman/location": "^5.1",
+        "wulfheart/pretty_routes": "^0.2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
