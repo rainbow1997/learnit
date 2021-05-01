@@ -92,6 +92,9 @@
 
         <main class="py-5 my-4">
             <div class="container">
+                @if (Session::has('message'))
+                    <li>{!! session('message') !!}</li>
+                @endif
             @yield('content')
             </div>
             <div class="row"></div>

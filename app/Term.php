@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 class Term extends Model
 {
 
-protected $fillable=['term_start_date','term_end_date','status'];
+protected $fillable=['term_start_date','term_end_date','status','title'];
 
 public function toggleStatus()
 {
@@ -26,5 +26,8 @@ public function users()
 {
     return $this->belongsToMany(User::class,'users_terms_tbl');
 }
+public function delete()
+{
 
+}
 }

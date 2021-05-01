@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
+use DB;
 
 use App\Policies\TermPolicy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Term as Term;
+//felan sath dastresio bikhial ta CRUD ha takmil she
 class TermController extends Controller
 {
     /**
@@ -16,14 +19,14 @@ class TermController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role_or_permission:modirkol|term-index');
+       // $this->middleware('role_or_permission:modirkol|term-index');
 
     }
 
     public function index()
     {
         //
-        $terms=Term::all();
+        $terms=Term::paginate(5);//khodesh kollo 15 taei mide
         return view('term_management',['terms'=>$terms]);
     }
 
@@ -35,6 +38,7 @@ class TermController extends Controller
     public function create()
     {
         //
+        return view('term_create');
     }
 
     /**
@@ -46,6 +50,19 @@ class TermController extends Controller
     public function store(Request $request)
     {
         //
+        $validated=$request->validate(
+            [
+                'title'=>'required|unique:terms|max:150',
+                'term_start_date'=>'required|date',
+                'term_end_date'=>'required|date',
+                'status'=>'required|boolean'
+
+            ]
+        );
+        $term=new Term($validated);
+        $term->save();
+        Session::flash('message','ترم جدید، توسط شما با موفقیت به ثبت رسید.');
+        return redirect()->action([TermController::class,'index'])  ;
     }
 
     /**
@@ -69,8 +86,7 @@ class TermController extends Controller
     {
         //
         $term=Term::find($id);
-        $this->authorize('update',$term);
-        echo 'hi';
+        return view('term_edit',['term'=>$term]);
     }
 
     /**
@@ -97,6 +113,10 @@ class TermController extends Controller
      */
     public function destroy($id)
     {
+
         //
+        DB::table("terms")->where('id',$id)->delete();
+        Session::flash('message','ترم مورد نظر شما با موفقیت حذف شد.');
+        return redirect()->action([TermController::class,'index']);
     }
 }
