@@ -3,7 +3,9 @@
     @if(app()->getLocale()=="fa_IR")
         @push('scripts')
             <script>
-                $(function() {
+                $(function(){
+
+
                     $("#term_start_date, #term_start_date").persianDatepicker();
 
                 });
@@ -12,7 +14,6 @@
                     $("#term_end_date, #term_end_date").persianDatepicker();
 
                 });
-
             </script>
         @endpush
     @endif
@@ -32,8 +33,9 @@
 
                         @endif
 
-                        <form method="POST" class="" action="{{ route('register',app()->getLocale()) }}">
+                        <form method="POST" class="" action="../{{$term->id}}">
                             @csrf
+                            @method('PUT');
                             <div class="row ">
 
                                 <div class="col-md-3">
@@ -84,19 +86,23 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-check form-switch col-md-2">
-                                    <label class="form-check-label" for="status">وضعیت ترم</label>
-                                    <input class="form-check-input mt-4 ml-4" type="checkbox" id="status" checked>
+                                <div class=" col-md-3">
+                                    <label for="status" class="form-label text-center">وضعیت ترم </label>
+                                    <select class="form-select " aria-label="" id="status" name="status">
+                                        <option value="1">فعال</option>
+                                        <option value="0">غیرفعال</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="row my-3">
                                 <div class="col-md-3 mx-auto ">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" id="submit" class="btn btn-primary">
                                         ثبت ویرایش ترم
                                     </button>
                                 </div>
                             </div>
+                        </form>
                         @lang('youAreLoggedIn')
                     </div>
                 </div>

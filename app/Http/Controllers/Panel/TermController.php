@@ -27,7 +27,7 @@ class TermController extends Controller
     {
         //
         $terms=Term::paginate(5);//khodesh kollo 15 taei mide
-        return view('term_management',['terms'=>$terms]);
+        return view('term.term_management',['terms'=>$terms]);
     }
 
     /**
@@ -38,7 +38,7 @@ class TermController extends Controller
     public function create()
     {
         //
-        return view('term_create');
+        return view('term.term_create');
     }
 
     /**
@@ -73,7 +73,8 @@ class TermController extends Controller
      */
     public function show($id)
     {
-        //
+        $term=Term::find($id);
+        return view('term.term_show',['term'=>$term]);
     }
 
     /**
@@ -86,7 +87,7 @@ class TermController extends Controller
     {
         //
         $term=Term::find($id);
-        return view('term_edit',['term'=>$term]);
+        return view('term.term_edit',['term'=>$term]);
     }
 
     /**
@@ -99,10 +100,20 @@ class TermController extends Controller
     public function update(Request $request, $id)
     {
         //
-        die($id);
+        $validated=$request->validate(
+            [
+                'title'=>'required|max:150',
+                'term_start_date'=>'required|date',
+                'term_end_date'=>'required|date',
+                'status'=>'required|boolean'
+
+            ]
+        );
         $term=Term::find($id);
-        $this->authorize('update',$term);
-        echo 'hi';
+        $term->update($request->all());
+        Session::flash('message','ترم مورد نظر شما با موفقیت بروزرسانی شد.');
+        return redirect()->action([TermController::class,'index']);
+
     }
 
     /**
