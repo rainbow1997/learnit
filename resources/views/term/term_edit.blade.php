@@ -89,7 +89,10 @@
                                 <div class=" col-md-3">
                                     <label for="status" class="form-label text-center">وضعیت ترم </label>
                                     <select class="form-select " aria-label="" id="status" name="status">
-                                        <option value="1">فعال</option>
+                                        @if(($term->status))
+                                            <option value="1" selected>فعال</option>
+                                        @else
+                                            <option value="1">فعال</option>
                                         <option value="0">غیرفعال</option>
                                     </select>
                                 </div>

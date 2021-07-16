@@ -223,3 +223,6 @@ however there’s a nice and easy solution just for that.
 yeki az rahhaye kahesh khataye gpg too commit signings
 echo test | gpg --clearsign
 baraye privatekey hayer daraye password
+hatman yadet bashe dasturat @if o ba @endif bebandi
+
+pluck() maghadir khaso bedoon keys mide ama ba Model::get([]) ba keys mide

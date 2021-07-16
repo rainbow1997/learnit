@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model as Model;
 
 class Lesson extends Model
 {
-    protected $fillable=['name','registration_capacity','units','pay_per_unit','status'];
+    protected $fillable=['name','registration_capacity','units','pay_per_unit','status','term_id'];
 
     public function term()
     {
