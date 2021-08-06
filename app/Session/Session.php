@@ -42,4 +42,8 @@ class Session extends Model
     {
         return $this->hasMany('App\Homework\Homework');
     }
+    public function creator()
+    {
+        return $this->belongsTo('App\Users\User');
+    }
 }

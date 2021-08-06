@@ -54,7 +54,7 @@
 
                                     {!! Form::open(['method'=>'DELETE', 'url' =>route('Lessons_Management.destroy', $lesson->id),'style' => 'display:inline']) !!}
 
-                                    {!! Form::button('<i class="ft-trash"></i>حذف ترم', array('type' => 'submit','class' => 'btn btn-defult','title' => 'حذف ترم','onclick'=>'return confirm("آیا مطمئنید؟")')) !!}
+                                    {!! Form::button('<i class="ft-trash"></i>حذف درس', array('type' => 'submit','class' => 'btn btn-defult','title' => 'حذف درس','onclick'=>'return confirm("آیا مطمئنید؟")')) !!}
 
                                     {!! Form::close() !!}
 

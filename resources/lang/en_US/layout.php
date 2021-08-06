@@ -1,5 +1,5 @@
 <?php
-return 
+return
 [
     'font_family'=>'Nunito, sans-serif',
     'app_name'=>'Learnit',
@@ -26,7 +26,7 @@ return
     'verification_account'=>'Account Verification',
     'logout_text'=>'Logout',
     'Dashboard'=>'Dashboard',
-    'youAreLoggedIn'=>'You are logged in !',
+    'youAreLoggedIn'=>'شما وارد سامانه شده اید. !',
     'app_copyright'=>'Copyright 2020 by '.__('settings.app_name',[],app()->getLocale()).'. All Rights Reserved.',
     'welcome_pagetitle'=>'Welcome',
     'hello'=>'Hello',

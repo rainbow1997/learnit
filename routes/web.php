@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Panel\TermController as TermController;
 use Panel\LessonController as LessonController;
+use Panel\SessionController as SessionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +49,8 @@ foreach(config('app.all_locales') as $RouteLocale) {
         Route::post('ajaxShowUserTypeRegForm/', 'Auth\RegisterController@ajaxShowUserTypeRegForm');
         Route::resource('Terms_Management', TermController::class);
         Route::resource('Lessons_Management',LessonController::class);
+        Route::resource('Sessions_Management',SessionController::class);
+        Route::post('Sessions_Management/lessonsOfTerm','Panel\SessionController@lessonsOfTerm');
 
         Route::get('/testEmail', function () {
             $user = UserClass::find(1);

@@ -34,6 +34,10 @@ class Official extends Model
     {
         return $this->morphTo();
     }
+    public function ownLessons()
+    {
+        return $this->belongsTo();
+    }
 
     public static function create(OfficialUser $userObj,array $regData)//$attributes hamoon sheyei az Teacher
     {
