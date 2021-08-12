@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+
     }
 
     /**
@@ -27,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+                 $this->app->bind('path.public', function() {
+    return '/home/amnparda/public_html';
+                 });
         Paginator::useBootstrap();
 
 //        Relation::morphMap([
