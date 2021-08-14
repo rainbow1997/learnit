@@ -1,6 +1,5 @@
 /node_modules
-/public/hot
-/public/storage
+/public/*
 /storage/*.key
 /vendor
 .env
@@ -12,3 +11,12 @@ npm-debug.log
 yarn-error.log
 /certs
 composer.phar
+/bootstrap
+/config
+/storage
+/tests
+artisan
+webpack.mix.js
+server.php
+tailwind.config.js
+app/Providers/AppServiceProvider.php
