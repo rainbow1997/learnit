@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://learnit.amnpardazan.com'),
+    'url' => env('APP_URL', 'https://amnpardazan-sga.ir'),
 
     'asset_url' => env('ASSET_URL', null),
 
