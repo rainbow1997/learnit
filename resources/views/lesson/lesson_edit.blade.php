@@ -84,7 +84,7 @@
                                 <div class="col-md-3">
                                     <label for="units" class="form-label">تعداد واحد</label>
 
-                                    <input value="{{$lesson->registration_capacity}}" id="units" type="number" class="form-control @error('units') is-invalid @enderror" name="units" value="{{ old('units') }}" required autocomplete="units" autofocus>
+                                    <input value="{{$lesson->units}}" id="units" type="number" class="form-control @error('units') is-invalid @enderror" name="units" value="{{ old('units') }}" required autocomplete="units" autofocus>
 
                                     @error('units')
                                     <span class="invalid-feedback" role="alert">

@@ -72,9 +72,22 @@ class SessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Session $session)
     {
-        //
+        $validated = $request->validate([
+         'lesson_id'=>'required|alpha_num|exists:lessons,id',
+         'sort_number' => 'required|numeric',
+         'status' => 'required|boolean',
+         'sessionable_type' => 'required|string',
+          'describe' => 'required|string',
+          'full_text' => 'required|string',
+        ]);
+        $sessionable_type = new $validated['sessionable_type']();
+        $validated['sessionable_id'] = $sessionable_type->id;
+        $session = new Session($validated);
+        $session->sessionable()->attach($sessionable_type);
+        $session->save();
+
     }
 
     /**

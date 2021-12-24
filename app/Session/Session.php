@@ -1,12 +1,15 @@
 <?php
 namespace App\Session;
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Support\Facades\Auth as Auth;
 use App\Session\SessionPassStatus;
 class Session extends Model
 {
+    use SoftDeletes;
     protected $fillable=['name','describe','sort_number','full_text']; //bayad virayesh beshe
-
+    protected $dates = ['deleted_at'];
 
     public function lesson()
     {

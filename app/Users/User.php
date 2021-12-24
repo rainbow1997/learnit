@@ -94,6 +94,7 @@ class User extends Authenticatable
         $user=new User($collection);
 
         $user->userable()->associate($userObj);
+        $user->terms()->attach($user);
         $user->save();
         return $user;
         // $/user->create($userObj);

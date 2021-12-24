@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use App\Lesson;
 use App\Term;
 
@@ -15,11 +15,17 @@ class LessonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $terms;
     public function __construct()
     {
         $this->middleware('auth');//badan az middleware controllesh kon
+        $this->setTerms();
     }
-
+    private function setTerms()
+    {
+        $this->terms = Term::get(['title','id']);
+        return TRUE;
+    }
     public function index()
     {
         //
@@ -35,8 +41,8 @@ class LessonController extends Controller
     public function create()
     {
         //
-        $terms=Term::get(['title','id']);
-        return view('lesson.lesson_create',['terms'=>$terms]);
+        
+        return view('lesson.lesson_create',['terms'=>$this->terms]);
     }
 
     /**
@@ -59,6 +65,7 @@ class LessonController extends Controller
                 'status'=>'required|boolean'
             ]
         );
+        $validated['creator_id'] = Auth::id();
         $lesson=new Lesson($validated);
         $lesson->save();
         Session::flash('message','درس مورد نظر با موفقیت افزوده شد.');
@@ -68,30 +75,25 @@ class LessonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lesson $lesson)
     {
         //
         $terms=Term::get(['title','id']);
-        $lesson=Lesson::find($id);//badan findorfaile
-        return view('lesson.lesson_show',['lesson'=>$lesson,'terms'=>$terms]);
+        return view('lesson.lesson_show',['lesson'=>$lesson,'terms'=>$this->terms]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lesson $lesson)
     {
         //
-        $terms=Term::get(['title','id']);
-       // dd($terms);
-        $lesson=Lesson::find($id);//badan findorfaile
-        return view('lesson.lesson_edit',['lesson'=>$lesson,'terms'=>$terms]);
+
+        return view('lesson.lesson_edit',['lesson'=>$lesson,'terms'=>$this->terms]);
     }
 
     /**
@@ -101,7 +103,7 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lesson $lesson)
     {
         //
         $validated=$request->validate(
@@ -114,8 +116,7 @@ class LessonController extends Controller
                 'status'=>'required|boolean'
             ]
         );
-        $lesson=Lesson::find($id);
-        $lesson->update($request->all());
+        $lesson->update($validated);
         Session::flash('message','درس مورد نظر با موفقیت بروزرسانی شد.');
         return redirect()->action([LessonController::class,'index']);
     }
@@ -123,14 +124,13 @@ class LessonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)//az view id miad ama khode laravel
+    public function destroy(Lesson $lesson)//az view id miad ama khode laravel
         // tashkhis mide o inject mikone lessone marbootero
     {
         //
-        Lesson::find($id)->delete();
+        $lesson->delete();
         return redirect()->action([LessonController::class,'index'])->with('success','درس مورد نظر با موفقیت حذف شد.');
     }
 }

@@ -93,6 +93,7 @@
                                             <option value="1" selected>فعال</option>
                                         @else
                                             <option value="1">فعال</option>
+                                           @endif 
                                         <option value="0">غیرفعال</option>
                                     </select>
                                 </div>

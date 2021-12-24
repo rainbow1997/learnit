@@ -71,9 +71,8 @@ class TermController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Term $term)
     {
-        $term=Term::find($id);
         return view('term.term_show',['term'=>$term]);
     }
 
@@ -83,10 +82,9 @@ class TermController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Term $term)
     {
         //
-        $term=Term::find($id);
         return view('term.term_edit',['term'=>$term]);
     }
 
@@ -97,7 +95,7 @@ class TermController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Term $term)
     {
         //
         $validated=$request->validate(
@@ -109,7 +107,7 @@ class TermController extends Controller
 
             ]
         );
-        $term=Term::find($id);
+        
         $term->update($request->all());
         Session::flash('message','ترم مورد نظر شما با موفقیت بروزرسانی شد.');
         return redirect()->action([TermController::class,'index']);
@@ -122,11 +120,11 @@ class TermController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Term $term)
     {
 
         //
-        DB::table("terms")->where('id',$id)->delete();
+        $term->delete();
         Session::flash('message','ترم مورد نظر شما با موفقیت حذف شد.');
         return redirect()->action([TermController::class,'index']);
     }

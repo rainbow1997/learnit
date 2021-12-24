@@ -14,8 +14,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     @if(App::isLocale('fa_IR'))
-            <link rel='stylesheet' type='text/css' href='http://awebfont.ir/css?id=1116'>
-            <link href="{{ mix('css/rtl.css') }}" rel="stylesheet">
+			<link href="/css/rtl-template.css" rel="stylesheet">
+                        <link href="/css/rtl.css" rel="stylesheet">
 
         @else
             <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -113,7 +113,7 @@
     </div> <!-- yield get data and section send data to yield-->
     <script src="{{ mix('js/app.js') }}" ></script>
 
-    <script src="{{ mix('js/persianDatepicker.min.js') }}" ></script>
+    <script src="{{ asset('js/persianDatepicker.min.js') }}" ></script>
     @stack('scripts')
 
 

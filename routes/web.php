@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Middleware\CheckLanguage;
+use App\Term;
+use App\Lesson;
+use App\Session\Session;
 use App\Users\User as UserClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Panel\TermController as TermController;
-use Panel\LessonController as LessonController;
+use Panel\TermController;
+use Panel\LessonController;
 use Panel\SessionController as SessionController;
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +50,14 @@ foreach(config('app.all_locales') as $RouteLocale) {
         Route::get('/logout', 'Auth\LoginController@logout');
         Route::get('/home', 'HomeController@index');
         Route::post('ajaxShowUserTypeRegForm/', 'Auth\RegisterController@ajaxShowUserTypeRegForm');
+        // use Route-Model binding
+        Route::model('Terms_Management',Term::class);
         Route::resource('Terms_Management', TermController::class);
+        // use Route-Model binding
+        Route::model('Lessons_Management',Lesson::class);
         Route::resource('Lessons_Management',LessonController::class);
+        // use Route-Model binding
+        Route::model('Sessions_Management',Session::class);
         Route::resource('Sessions_Management',SessionController::class);
         Route::post('Sessions_Management/lessonsOfTerm','Panel\SessionController@lessonsOfTerm');
 

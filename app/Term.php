@@ -2,12 +2,14 @@
 namespace App;
 use App\Users\User;
 use Illuminate\Database\Eloquent\Model as Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Term extends Model
 {
+use SoftDeletes;
 
 protected $fillable=['term_start_date','term_end_date','status','title'];
+protected $dates=['term_start_date','term_end_date','deleted_at'];
 
 public function toggleStatus()
 {
@@ -25,9 +27,5 @@ public function changeTermDate($start,$end)
 public function users()
 {
     return $this->belongsToMany(User::class,'users_terms_tbl');
-}
-public function delete()
-{
-
 }
 }
