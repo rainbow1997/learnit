@@ -49,15 +49,15 @@ class SessionController extends Controller
     public function lessonsOfTerm(Request $request)
     {
         $term_id=$this->validateForLessonsOfTermFunction($request);
-        $lessons=Lesson::where('term_id','=',$term_id)
+        $lessons = Lesson::where('term_id','=',$term_id)
                               ->where('creator_id','=',Auth::id())->get();
-        $newLessons=[];
-        foreach($lessons as $lesson)
-        {
-            $newLessons='<option value=\"'.$lesson['id'].'\">'.$lesson['name'].'</option>';
-        }
+       
+        return response()->json($lessons,200);
+    }
+    public function sessionTypes(Request $request)
+    {
 
-        return response()->json(['lessons'=>$newLessons],200);
+        return response()->json('hi',200);
     }
     public function validateForLessonsOfTermFunction(Request $data)
     {

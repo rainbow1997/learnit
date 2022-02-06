@@ -60,7 +60,8 @@ foreach(config('app.all_locales') as $RouteLocale) {
         Route::model('Sessions_Management',Session::class);
         Route::resource('Sessions_Management',SessionController::class);
         Route::post('Sessions_Management/lessonsOfTerm','Panel\SessionController@lessonsOfTerm');
-
+        Route::get('Sessions_Management/sessionTypes','Panel\SessionController@sessionTypes');
+        
         Route::get('/testEmail', function () {
             $user = UserClass::find(1);
             // die(var_dump($user));

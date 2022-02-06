@@ -1,188 +1,155 @@
 <template>
-    <div class="container">
-         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header"> @lang('layout.Dashboard')   >  افزودن جلسه جدید</div>
+<div>
+    <form method="POST" class="" action="../Sessions_Management">
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
+        <input type="hidden" name="_token" :value="csrf"> 
+        <div class="row ">
 
-                        @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+            <div class="col-md-3">
+                <label for="term_id" class="form-label">ترم مربوطه</label>
+                <select v-model="term" class="form-control" id="term_id" name="term_id" v-on:click="getLessonsOfTerm">
 
-                        <form method="POST" class="" action="../Sessions_Management">
-                            @csrf
-                            <div class="row ">
+                    <option v-for="term in terms" :key="term.id" :value="term.id">{{term.title}}
+                    </option>
 
-                                <div class="col-md-3">
-                                    <label for="term_id" class="form-label">ترم مربوطه</label>
-                                    <select class="form-control" id="term_id" name="term_id" onclick="getLessonsOfTerm">
-                                        
-                                            <option v-for="term in terms" :key="term.id" :value="term.id">{{term.title}}</option>
-                                        
-                                    </select>
+                </select>
 
-                                    @error('term_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+               
+            </div>
 
 
 
 
 
-                                <div class="col-md-3">
-                                    <label for="describe" class="form-label">شرح کوتاه جلسه</label>
+            <div class="col-md-3">
+                <label for="describe" class="form-label">شرح کوتاه جلسه</label>
 
-                                    <input id="describe" type="name" class="form-control @error('describe') is-invalid @enderror" name="describe" value="{{ old('describe') }}" required autocomplete="describe" autofocus>
+                <input id="describe" type="name" class="form-contro"
+                    name="describe" required autocomplete="describe" autofocus>
 
-                                    @error('describe')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+              
+            </div>
 
 
-                                <div class="col-md-3">
-                                    <label for="lesson_id" class="form-label">درس مربوطه</label>
-                                    <select class="form-control" id="lesson_id" name="lesson_id" onclick="">
+            <div class="col-md-3">
+                <label for="lesson_id" class="form-label">درس مربوطه</label>
+                <select class="form-control" id="lesson_id" name="lesson_id">
+                    <option v-for="lesson in ourLessons" :key="lesson.id" :value="lesson.id">{{lesson.name}}</option> 
 
 
+                </select>
 
-                                    </select>
-
-                                    @error('lesson_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+              
+            </div>
 
 
-                                <div class="col-md-3">
-                                    <label for="typesOfSessions" class="form-label">نوع جلسه</label>
-                                    <select class="form-control" id="typesOfSessions" name="typesOfSessions"">
-                                    @foreach($typesOfSessions as $session)
+            <div class="col-md-3">
+                <label for="typesOfSessions" class="form-label">نوع جلسه</label>
+                <select class="form-control" id="typesOfSessions" name="typesOfSessions" v-on:click="getSessionTypes">
+                    <option v-for="session in sessions" :key="session.id" :value="session.title">{{session.title}}</option>
+      
+                </select>
 
-                                        <option value="{{$session}}">{{$session}}</option>
-                                        @endforeach
-
-                                    </select>
-
-                                    @error('typesOfSessions')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+              
+            </div>
 
 
 
 
 
 
-                                <div class="col-md-3">
-                                    <label for="sort_number" class="form-label">ترتیب جلسه</label><!-- badan ghashangtar va modern tar beshe in ghesmat -->
+            <div class="col-md-3">
+                <label for="sort_number" class="form-label">ترتیب جلسه</label>
+                <!-- badan ghashangtar va modern tar beshe in ghesmat -->
 
-                                    <input id="sort_number" type="number" class="form-control @error('sort_number') is-invalid @enderror" name="sort_number" value="{{ old('sort_number') }}" required autocomplete="sort_number" autofocus>
+                <input id="sort_number" type="number" class="form-control"
+                    name="sort_number"  required autocomplete="sort_number" autofocus>
 
-                                    @error('sort_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+               
+            </div>
 
 
 
 
 
-                                <div class="col-md-3">
-                                    <label for="full_text" class="form-label">شرح کامل جلسه</label>
+            <div class="col-md-3">
+                <label for="full_text" class="form-label">شرح کامل جلسه</label>
 
-                                    <textarea class="form-control @error('full_text') is-invalid @enderror" id="full_text" rows="20" name="full_text" value="{{ old('full_text') }}" required autocomplete="full_text" autofocus></textarea>
+                <textarea class="form-control " id="full_text" rows="20"
+                    name="full_text"  required autocomplete="full_text"
+                    autofocus></textarea>
 
-                                    @error('full_text')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+               
+            </div>
 
 
 
 
-                                <div class=" col-md-3">
-                                    <label for="status" class="form-label text-center">وضعیت جلسه </label>
-                                    <select class="form-select " aria-label="" id="status" name="status">
-                                        <option value="1" selected>فعال</option>
-                                        <option value="0">غیرفعال</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row my-3">
-                                <div class="col-md-3 mx-auto ">
-                                    <button type="submit" class="btn btn-primary">
-                                        ثبت جلسه جدید
-                                    </button>
-                                </div>
-                            </div>
-                        @lang('layout.youAreLoggedIn')
-                    </div>
-                </div>
+            <div class=" col-md-3">
+                <label for="status" class="form-label text-center">وضعیت جلسه </label>
+                <select class="form-select " aria-label="" id="status" name="status">
+                    <option value="1" selected>فعال</option>
+                    <option value="0">غیرفعال</option>
+                </select>
             </div>
         </div>
-    </div>
+
+        <div class="row my-3">
+            <div class="col-md-3 mx-auto ">
+                <button type="submit" class="btn btn-primary">
+                    ثبت جلسه جدید
+                </button>
+            </div>
+        </div>
+        </form>
+        </div>
 </template>
 
 <script>
-    export default {
-        props:['terms','token'],
-        data(){
-            return{
-                 session:{},
-                 term:{},
-                 output:{},
+    export default{
+        props: ['csrf','terms','sessions'],
+        data() {
+            return {
+                session: {},
+                term: {},
+                output: {},
+                ourLessons:{},
+                ourSessions: {},
             }
         },
-        method:{
-          getLessonsOfTerm:function()
-          {
-              let ourObject = this;
-              axios.post('lessonsOfTerm',
-              {
-                 _token : this.token,
-                 term_id : this.term.id,
+        methods: {
+            getLessonsOfTerm() {
+                console.log('were here');
+                let ourObject = this;
+                axios.post('lessonsOfTerm', {
+                        _token: this.csrf,
+                         term_id:this.term
+                    })
+                    .then(function (response) {
+                        ourObject.output = response.data;
+                    })
+                    .catch(function (error) {
+                        ourObject.output = error;
 
-              })
-              .then(function(response)
-              {
-                 ourObject.output = response.data;
-              })
-              .catch(function(error){
-                 ourObject.output = error;
-
-              });
-          }
+                    });
+                console.log(ourObject.output);
+                this.ourLessons ={...ourObject.output};
+            },
+        getSessionTypes()
+        {
+            axios.get('sessionTypes')
+            .then(response=>{
+            this.ourSessions = response.data
+            })
+            .catch(e =>{
+                console.log(e)
+            });
+        }
         },
         mounted() {
+            
+            console.log(this.terms[0].title);
             console.log('Component mounted.');
         }
     }
-</script>
+     </script>

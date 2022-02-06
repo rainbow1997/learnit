@@ -6,5 +6,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /certs
-composer.phar
 /vendor
+/node_modules
+
+/.cloud/
+.cloud/
+/.cloud
